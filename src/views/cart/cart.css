@@ -57,6 +57,11 @@ input[type='number'] {
     width: 40px;
 }
 
+#cart-price-order {
+    display: flex;
+    flex-direction: column;
+}
+
 #cart-price {
     display: flex;
     justify-content: space-evenly;
@@ -69,6 +74,12 @@ input[type='number'] {
     flex-direction: column;
     align-items: center;
     font-size: large;
+}
+
+#order-button {
+    width: 100px;
+    align-self: flex-end;
+    margin-top: 10px;
 }
 
 .fa-plus {
