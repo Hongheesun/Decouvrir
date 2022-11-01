@@ -1,0 +1,19 @@
+body {
+    background-color: black;
+}
+
+.month-artist {
+    /*color: #fff;*/
+    text-align: center; 
+}
+
+.card {
+    max-width: 300px;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.card-header {
+    justify-content: center;
+    padding: 10px 0px;
+}
