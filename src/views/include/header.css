@@ -1,0 +1,40 @@
+/* ul,
+li,
+h1,
+a {
+  color: #fff;
+} */
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px 10px 20px;
+  box-sizing: border-box;
+}
+
+nav ul {
+  display: flex;
+}
+
+nav div {
+  display: flex;
+}
+
+/* nav ul:first-child {
+  with: ;
+} */
+
+nav ul li {
+  padding: 10px;
+}
