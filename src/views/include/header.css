@@ -1,3 +1,10 @@
+/* ul,
+li,
+h1,
+a {
+  color: #fff;
+} */
+
 ul,
 li {
   list-style: none;
