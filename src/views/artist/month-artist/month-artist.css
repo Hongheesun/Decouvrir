@@ -1,16 +1,18 @@
 body {
     background-color: black;
+    height: 100vh;
 }
 
 .month-artist {
     color: white;
     text-align: center; 
-    padding: 50px 0px;
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
 
 .card {
     max-height: fit-content;
-    border-radius: 30px;
+    border-radius: 0px;
 }
 
 .card-header {
@@ -18,10 +20,12 @@ body {
     padding: 10px 0px;
 }
 
+
 .content{
     text-align: center; 
 }
 
 .card-footer {
-    padding: 10px 0px;
+    padding: 0px;
+    max-height: fit-content;
 }
