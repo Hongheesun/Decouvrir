@@ -1,23 +1,7 @@
 #container {
 display: flex;
 }
-/* 사이드 메뉴에 bulma 적용 안할 때? */
-.menu {
-    width: 20%;
-    padding: 10px;
 
-}
-
-.menu-list {
-    border-radius: 5px;
-    font-size: large;
-    color: white;
-}
-
-.menu-list:hover {
-    background-color: gainsboro;
-    color: black;
-}
 
 main {
     width: 80%;
@@ -65,14 +49,15 @@ input[type='number'] {
 #cart-price {
     display: flex;
     justify-content: space-evenly;
-    background-color: white;
     padding: 40px;
+    border: 2px solid white;
 }
 
 .cart-price-box {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     font-size: large;
 }
 
@@ -83,7 +68,7 @@ input[type='number'] {
 }
 
 .fa-plus {
-    background-color: aliceblue;
+    background-color: rgb(201, 201, 201);
     padding: 10px;
     border-radius: 50%;
 }
@@ -91,4 +76,5 @@ input[type='number'] {
 body {
     background-color: black;
     height: 100vh;
+    color: white;
 }
