@@ -3,17 +3,25 @@ body {
 }
 
 .month-artist {
-    /*color: #fff;*/
+    color: white;
     text-align: center; 
+    padding: 50px 0px;
 }
 
 .card {
-    max-width: 300px;
-    margin: 0 auto;
-    margin-top: 25px;
+    max-height: fit-content;
+    border-radius: 30px;
 }
 
 .card-header {
     justify-content: center;
+    padding: 10px 0px;
+}
+
+.content{
+    text-align: center; 
+}
+
+.card-footer {
     padding: 10px 0px;
 }
