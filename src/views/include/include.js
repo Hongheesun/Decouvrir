@@ -24,7 +24,6 @@ function includeHTML() {
     } //if - file
   } //for
 } //includeHTML
-
 /* ✨ 실행 */
 window.addEventListener("DOMContentLoaded", () => {
   includeHTML();
