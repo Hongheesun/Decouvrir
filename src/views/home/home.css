@@ -1,19 +1,54 @@
-.div-container {
+body {
+  height: 120vh;
+}
+
+.main-wrapper {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  height: 100vh;
+  align-items: center;
 }
 
-.landing {
-  cursor: pointer;
-  border: 1px solid red;
-  padding: 10px;
+.menu-wrapper {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.greeting {
-  cursor: pointer;
-  border: 1px solid blue;
-  padding: 10px;
-  margin-left: 3rem;
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: 1;
+}
+
+.background-video__content {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.text-box {
+  margin-top: 300px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  color: rgb(255, 255, 255);
+  font-size: 23px;
+  font-weight: 900;
+  /* opacity: 0; */
+}
+
+#btn {
+  font-weight: 600;
+  margin-right: 10px;
 }
