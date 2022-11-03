@@ -1,0 +1,16 @@
+.menu {
+    width: 20%;
+    padding: 10px;
+}
+
+.menu-list {
+    border-radius: 5px;
+    font-size: large;
+    color: white;
+    padding: 10px 30px 10px;
+}
+
+.menu-list:hover {
+    background-color: gainsboro;
+    color: black;
+}

@@ -1,18 +1,72 @@
-.login-form-container {
+body {
+  width: 100%;
+  background-color: #000;
+  height: 100vh;
+}
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-wrapper {
+  padding-top: 220px;
+  width: 320px;
+  /* height: 300px; */
+}
+
+.login-wrapper form {
+  height: 370px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form span {
+  font-size: 25px;
+  color: #fff;
+}
+
+.how-to-login button {
+  width: 140px;
+  color: #fff;
+  background-color: #000;
+  border-bottom-style: solid;
+  /* border-bottom-color: orange; */
+  border-bottom-width: 2px;
+}
+
+button {
+  border: none;
+}
+
+/* section {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 85vh;
+} */
+
+/* .input-wrapper {
+} */
+
+#idInput,
+#password {
+  width: 300px;
+  margin-bottom: 10px;
 }
 
-.login-form-box {
-  width: 30rem;
+.input-button button {
+  width: 300px;
+  margin-bottom: 10px;
+}
+.input-button button:first-child {
+  background-color: #f0aa41;
+  border: none;
 }
 
-.login-form-box .title {
-  text-align: center;
-}
-
-.login-form-box .button {
-  font-weight: bold;
+.input-button button:nth-child(2) {
+  color: #fff;
+  background-color: #000;
+  border: 2px solid #f0aa41;
 }
