@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>주문/결제</title>
+    <link rel="stylesheet" href="../include/header.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="./order.css" />
+  </head>
+  <body>
+    <header data-include="../include/header.html"></header>
+    <section class="page-inner">
+        <div class="order">
+            <h3>주문 / 결제</h3>
+        </div>
+        <div id="orderer-info">
+          <div class="order-header">
+            <p><b>주문자 정보</b></p>
+          </div>
+            <div class="common-input-wrapper">
+              <div class="common-input-label">
+                <label class="input-label">이메일</label>
+              </div>
+              <div class="common-input">
+                <input type="email" id="orderer-email" name="orderer-email" readonly>
+              </div>
+            </div>
+            <div class="common-input-wrapper">
+              <div class="common-input-label">
+                <label class="input-label">이름</label>
+              </div>
+              <div class="common-input">
+                <input type="text" id="orderer-name" name="orderer-name" readonly>
+              </div>
+            </div> 
+            <div class="common-input-wrapper">
+              <div class="common-input-label">
+                <label class="input-label">연락처</label>
+              </div>
+              <div class="common-input">
+                <input type="tel" id="orderer-tel" name="orderer-tel" readonly>
+              </div>
+            </div>  
+        </div>
+
+        <div id="delivery-info">
+          <div class="order-header">
+            <p><b>배송 정보</b></p>
+          </div>
+          <div class="common-input-wrapper">
+            <div class="common-input-label">
+              <label class="input-label">수령인</label>
+              <a class="same-shipping" onclick="">주문자 정보와 동일</a>
+            </div>
+            <div class="common-input">
+              <input type="text" name="delivery-name">
+            </div>
+          </div> 
+          <div class="common-input-wrapper">
+            <div class="common-input-label">
+              <label class="input-label">연락처</label>
+            </div>
+            <div class="common-input">
+              <input type="tel" name="delivery-tel">
+            </div>
+          </div> 
+          <div class="common-input-wrapper">
+            <div class="common-input-label">
+              <label class="input-label">배송주소</label>
+              <a class="same-shipping" onclick="">주문자 정보와 동일</a>
+            </div>
+            <div class="common-input">
+              <input type="text" name="delivery-address">
+            </div>
+          </div> 
+          
+          <div class="common-input-wrapper">
+            <div class="common-input-label">
+              <label class="input-label">기사님께 전하는 메세지</label>
+            </div>
+            <div class="common-input">
+              <input type="text" id="orderer-name" name="delivery-msg">
+            </div>
+          </div>
+        </div>
+
+        <div class="notification-list">
+            <ul>
+                <li>Découvrir의 모든 작품들은 주문 후 환불 및 반품이 어려운 점 양해부탁드립니다.</li>
+                <li>(주말 및 공휴일 제외) 주문 상품 품절/배송 지연 예상 시 유선/SMS 안내. 일부 군사지역은 배송이 불가능할 수 있습니다.</li>
+                <li>도움이 필요하신가요? 더 궁금하신 사항이 있다면 Découvrir 고객센터 [전화번호]로 문의하여 주십시오.</li>
+            </ul>
+        </div>
+    </section>
+
+    <script src="./order.js"></script>
+    <script src="../include/include.js" defer></script>
+    <script src="https://kit.fontawesome.com/58adb12a8e.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+  </body>
+  <footer></footer>
+</html>

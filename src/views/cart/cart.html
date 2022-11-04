@@ -3,14 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-        
     <title>장바구니</title>
-    <script src="../include/include.js" defer></script>
-    <script
-      src="https://kit.fontawesome.com/58adb12a8e.js"
-      crossorigin="anonymous"
-    ></script>
-
     <link rel="stylesheet" href="../include/header.css" />
     <link rel="stylesheet" href="../include/sidemenu.css" />
     <!-- <link
@@ -24,23 +17,27 @@
     <div id="container">
       <aside data-include="../include/sidemenu.html"></aside>
       <main>
-        <div id="cart-delete-buttons">
+        <div class="cart">
+          <h3>장바구니</h3>
+        </div>
+        <div class="buttons-container">
           <button>선택 상품 삭제하기</button>
           <button>전체 상품 삭제하기</button>
         </div>
+        
         <div id="cart-item-list">
           <!--js로 item 추가-->
 
           <!--item 구조-->
           <div id="cart-item">
             <input type="checkbox" />
-            <img src="https://bulma.io/images/placeholders/128x128.png" />
+            <div>
+              <img class="작품사진" src="https://bulma.io/images/placeholders/128x128.png" />
+            </div>
+            
             <div id="item-info">
               <a>아이템 이름</a>
               <span>작가 이름</span>
-            </div>
-            <div id="item-quantity">
-              <input type="number" min="1" />
             </div>
             <div id="item-price"><strong>200,000</strong>원</div>
           </div>
@@ -53,9 +50,6 @@
             <div id="item-info">
               <a>아이템 이름</a>
               <span>작가 이름</span>
-            </div>
-            <div id="item-quantity">
-              <input type="number" min="1" />
             </div>
             <div id="item-price"><strong>200,000</strong>원</div>
           </div>
@@ -83,6 +77,10 @@
         </div>
       </main>
     </div>
+    
     <script src="./cart.js"></script>
+    <script src="../include/include.js" defer></script>
+    <script src="https://kit.fontawesome.com/58adb12a8e.js" crossorigin="anonymous"></script>
+
   </body>
 </html>

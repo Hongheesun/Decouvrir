@@ -1,0 +1,63 @@
+body {
+    background-color: black;
+    height: 100vh;
+    color: white;
+}
+
+.page-inner {
+    margin: 50px 100px;
+    text-align: center;
+}
+
+.order {
+    font-size: 20px;
+    padding-bottom: 10px;
+    border-bottom-width: thin;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+}
+
+#orderer-info {
+    padding-bottom: 50px;
+    border-bottom-width: thin;
+    border-bottom-style: solid;
+    border-bottom-color: #d2d2d2;
+}
+
+.order-header {
+    font-size: 20px;
+    margin: 10px 0;
+    height: 50px;
+    line-height: 50px;
+}
+
+.common-input-wrapper {
+    margin: 10px 0 20px 30px;
+}
+
+.common-input-label {
+    margin-bottom: 10px;
+}
+
+.page-inner input {
+    padding: 0 20px;
+    width: 40%;
+    height: 40px;
+    line-height: 40px; 
+}
+
+
+.notification-list {
+    font-size: 15px;
+    color: #EC9511;
+    margin: 30px 0px;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.notification-list li{
+    list-style: disc;
+    margin-top: 5px;
+    padding-left: 5px;
+}
