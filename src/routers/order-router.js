@@ -10,7 +10,6 @@ const orderRouter = Router();
 
 // 주문 생성
 orderRouter.post('/order', async(req, res, next)=> {
-    console.log("주문 만들기")
 try{
     const newOrder = await orderService.addOrder(req.body)
       res.status(201).json(newOrder)
@@ -48,6 +47,21 @@ orderRouter.get('/orders/:orderId', async(req, res, next)=> {
         const orderId = req.params.orderId;
         const order = await orderService.getOneOrder(orderId);
         res.json(order)
+    } catch(err){
+        next(err);
+    }
+})
+
+orderRouter.delete('/orders/:orderId', async(req, res, next)=> {
+    try{
+        const orderId = req.params.orderId
+        await orderService.deleteOrder(orderId);
+        res.json(
+            {
+                message: '주문 정보 삭제 완료'
+            }
+        )
+
     } catch(err){
         next(err);
     }

@@ -24,6 +24,10 @@ export class OrderModel {
       return order;
    }
 
+    async delete(orderId){
+      return await Order.findOneAndDelete({ orderId }); 
+    }
+
 
 }
 

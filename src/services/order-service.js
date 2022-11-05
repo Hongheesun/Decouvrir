@@ -41,6 +41,10 @@ class OrderService {
       return await orderModel.findAll();
     }
 
+    async deleteOrder(orderId){
+      return await orderModel.delete(orderId);
+    }
+
 }
 
 const orderService = new OrderService(orderModel);
