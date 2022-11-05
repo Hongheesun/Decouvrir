@@ -6,6 +6,10 @@ const OrderSchema = new Schema(
             type: String,
             required: true,
         },
+        orderId : {
+            type: String,
+            required: true,
+        },
         products: {
             type: Object,
             required: true,
@@ -30,7 +34,7 @@ const OrderSchema = new Schema(
         phoneNumber: {
             type: String,
             required: true },
-            
+
         orderedAt: {
             type: Date, 
             immutable: true,

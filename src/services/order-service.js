@@ -6,20 +6,25 @@ class OrderService {
       this.orderModel = orderModel;
     }
 
-    async addOrder(orderInfo) {
+        async addOrder(orderInfo) {
         const { email, products, address, phoneNumber } = orderInfo;
-    // userId는 로그인 된 정보로 user db에서 찾아야되고
-    const totalPrice = products.reduce((acc, curr)=>{
-      return acc.price + curr.price;
-  }); 
+        // 날짜로 주문번호 생성
+        const newDate = new Date();
+        function formatDate(newDate){
+        let formattedDate = `${ newDate.getFullYear() }`;
+        formattedDate += `${ `0${ newDate.getMonth() + 1 }`.slice(-2) }`;
+        formattedDate += `${ `0${ newDate.getDate() }`.slice(-2) }`; 
+        return formattedDate;
+        }
+        const orderId = formatDate(newDate);
+
+        const totalPrice = products.reduce((acc, curr)=>{
+          return acc.price + curr.price;
+      }); 
         const deliveryStatus = "상품준비중";
-
-        const newOrderInfo = { email, products, totalPrice, address, phoneNumber, deliveryStatus};
-
+        const newOrderInfo = { email, orderId, products, totalPrice, address, phoneNumber, deliveryStatus};
         const order = orderModel.create(newOrderInfo);
-        // db에 저장
         return order;
-        // 만든 새로운 order document 리턴
       }
 
 
