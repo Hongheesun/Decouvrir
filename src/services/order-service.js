@@ -33,6 +33,14 @@ class OrderService {
       return orderModel.update(orderId, update);
     }
 
+    async getOneOrder(orderId){
+      return await orderModel.find(orderId);
+    }
+
+    async getAllOrders(){
+      return await orderModel.findAll();
+    }
+
 }
 
 const orderService = new OrderService(orderModel);

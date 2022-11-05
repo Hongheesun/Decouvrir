@@ -20,7 +20,7 @@ try{
 });
 
 //주문 수정
-orderRouter.patch('/order/:orderId', async(req, res, next)=> {
+orderRouter.patch('/orders/:orderId', async(req, res, next)=> {
     try{
          const orderId = req.params.orderId;
 
@@ -33,5 +33,26 @@ orderRouter.patch('/order/:orderId', async(req, res, next)=> {
  catch(err){
     next(err);
 }});
+
+orderRouter.get('/orders', async(req, res, next)=> {
+    try{
+        const orders = await orderService.getAllOrders();
+        res.json(orders)
+    } catch(err){
+        next(err);
+    }
+})
+
+orderRouter.get('/orders/:orderId', async(req, res, next)=> {
+    try{
+        const orderId = req.params.orderId;
+        const order = await orderService.getOneOrder(orderId);
+        res.json(order)
+    } catch(err){
+        next(err);
+    }
+})
+
+
 
 export { orderRouter };
