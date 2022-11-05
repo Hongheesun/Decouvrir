@@ -17,7 +17,6 @@ class OrderService {
         return formattedDate;
         }
         const orderId = formatDate(newDate);
-
         const totalPrice = products.reduce((acc, curr)=>{
           return acc.price + curr.price;
       }); 
@@ -33,6 +32,7 @@ class OrderService {
       const update = {address, phoneNumber};
       return orderModel.update(orderId, update);
     }
+
 }
 
 const orderService = new OrderService(orderModel);

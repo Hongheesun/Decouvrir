@@ -14,15 +14,15 @@ export class OrderModel {
 
       async update(orderId, update){
         // update = {address, phoneNumber}
-        return await Order.updateOne({_id:orderId}, update)
+        return await Order.updateOne({orderId}, update)
         // orderId 완성되면 { orderId }가 들어와야 함(첫번째 인자에)
       }
 
 
-      // async findById(orderId) {
-      //   const order = await Order.findOne({ _id: orderId });
-      //   return order;
-     // }  orderId는 _id값에 맞는 랜덤 문자열
+    //   async findById(orderId) {
+    //     const order = await Order.findOne({ _id: orderId });
+    //     return order;
+    //  }
 }
 
 const orderModel = new OrderModel();
