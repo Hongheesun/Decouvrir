@@ -2,6 +2,12 @@ let ordererEmail = document.getElementById("orderer-email");
 let ordererName = document.getElementById("orderer-name");
 let ordererTel = document.getElementById("orderer-tel");
 
+let userId;
+async function getUserInfo(){
+
+}
+getUserInfo();
+
 function inputOrdererInfo(){
     // user 정보를 받아와서
     ordererEmail.value = "xxxxxx@gmail.com";
