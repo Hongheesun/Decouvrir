@@ -10,6 +10,7 @@ export class CategoryModel {
     //카테고리 생성
     async create(CategoryInfo) {
         const createCategory = await Category.create(CategoryInfo);
+        return createCategory;
     }
     //수정
     async update({seq, update}) {
@@ -17,7 +18,7 @@ export class CategoryModel {
     }
     //전체 조회
     async findAll() {
-        const categories = await Category.find();
+        const categories = await Category.find({});
         return categories;
     }
     //특정 카테고리 조회

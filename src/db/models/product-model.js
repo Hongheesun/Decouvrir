@@ -27,8 +27,16 @@ export class ProductModel {
     async findById(seq) {
         return await Product.findOne({seq});
     }
-
-    
+    //카테고리에 맞는 상품 하나 찾기
+    async findOneByCategoryName(category) {
+        const product = await Product.findOne(category);
+        return product;
+    }
+    //카테고리에 맞는 상품 다 찾기
+    async findAllByCategoryName(category) {
+        const products = await Product.find(category);
+        return products;
+    }    
 }
 const productModel = new ProductModel();
 

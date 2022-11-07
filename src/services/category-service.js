@@ -1,8 +1,9 @@
-import { CategoryModel } from "../db";
+import { CategoryModel, productModel } from "../db";
 
 class CategoryService {
-    constructor(CategoryModel) {
+    constructor(CategoryModel, productModel) {
         this.CategoryModel = CategoryModel;
+        this.productModel = productModel;
     }
     async getCategories() {
         return await this.CategoryModel.findAll();
@@ -31,7 +32,25 @@ class CategoryService {
             update: toUpdate,
         })
     }
-    async deleteCategory(seq) {
+    async getCategoryByName(CategoryInfo) {
+        const category = await this.categoryModel.findByCategory(CategoryInfo);
+    
+        // db에서 찾지 못한 경우, 에러 메시지 반환
+        if (!category) {
+        throw new Error(
+            "없는 카테고리입니다."
+        );
+        }
+    
+        return category;
+    }
+    
+    async deleteCategory(category) {
+        let product = await this.productModel.findOneByCategoryName(category)
+
+        if (product) {
+            "카테고리에 등록된 제품이 있습니다. 등록된 제품이 없어야 삭제가 가능합니다."
+        }
         let category = await CategoryModel.delete(seq);
         if (!category) {
             throw new Error ('없는 카테고리입니다.');
@@ -40,6 +59,6 @@ class CategoryService {
     } 
 }
 
-const CategoryService = new CategoryService(CategoryModel);
+const CategoryService = new CategoryService(CategoryModel, productModel);
 
 export { CategoryService };
