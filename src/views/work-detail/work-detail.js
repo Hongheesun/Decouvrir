@@ -50,7 +50,7 @@ function addCart(){
 addCartBtn.addEventListener("click", addCart);
 
 
-// 구매하기 
+// 구매하기 +
 const buyBtn = document.querySelector(".BuyNow");
 
 function buyNow(){

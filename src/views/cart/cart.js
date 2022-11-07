@@ -23,6 +23,8 @@ function addCartItemList(cartList) {
                     <button class="item-delete-btn" type="button">삭제</button>
                     </div>
                 </li>`;
+            document.querySelector(".cart-total-price").innerHTML = `${totalPrice(cartList)}원`;
+            document.querySelector(".all-item-order-btn").innerHTML = `총 ${totalCount(cartList)}건 주문 계속하기`;
         });    
     }
     else {
@@ -39,11 +41,10 @@ addCartItemList(cartList);
 function totalPrice(cartList) {
     return cartList.reduce((sum, cur) => sum + cur.price, 0); 
 }
+
 function totalCount(cartList) {
     return cartList.length;
 }
-document.querySelector(".cart-total-price").innerHTML = `${totalPrice(cartList)}원`;
-document.querySelector(".all-item-order-btn").innerHTML = `총 ${totalCount(newCartList)}건 주문 계속하기`;
 
 
 // todo: 개별 cart list 삭제
@@ -55,8 +56,6 @@ function itemDelete() {
     const newCartList = []; // filter를 통해서 해당하는 상품 id와 같지 않은 걸로 구성하고 싶음. 
     localStorage.setItem("cart", JSON.stringify(newCartList));
     addCartItemList(newCartList);
-    document.querySelector(".cart-total-price").innerHTML = `${totalPrice(newCartList)}원`;
-    document.querySelector(".all-item-order-btn").innerHTML = `총 ${totalCount(newCartList)}건 주문 계속하기`;
 }
 
 itemDeleteBtn.addEventListener("click", itemDelete);
@@ -73,4 +72,15 @@ function allDelete() {
 allDeleteBtn.addEventListener("click", allDelete);
 
 
+// 주문하기 btn 
+const buyAllBtn = document.querySelector(".all-item-order-btn");
+
+function buyAllItem(){
+
+    const buyList = [];
+    // JSON.parse(localStorage.getItem("cart")).forEach(elem => )
+    localStorage.setItem("buy", JSON.stringify(buyList));
+}
+
+buyBtn.addEventListener("click", buyAllItem);
 
