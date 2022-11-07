@@ -9,8 +9,9 @@ import mongoose from "mongoose";
 const orderRouter = Router();
 
 // 주문 생성
-orderRouter.post('/order', async(req, res, next)=> {
+orderRouter.post('/order', loginRequired, async(req, res, next)=> {
 try{
+    req.body.userId = req.currentUserId;
     const newOrder = await orderService.addOrder(req.body)
       res.status(201).json(newOrder)
 } catch(err){
@@ -33,20 +34,25 @@ orderRouter.patch('/orders/:orderId', async(req, res, next)=> {
     next(err);
 }});
 
-orderRouter.get('/orders', async(req, res, next)=> {
+orderRouter.get('/orders', loginRequired, async(req, res, next)=> {
     try{
-        const orders = await orderService.getAllOrders();
+        req.body.userId = req.currentUserId;
+        const orders = await orderService.getAllOrders(req.body.userId);
         res.json(orders)
     } catch(err){
         next(err);
     }
 })
 
-orderRouter.get('/orders/:orderId', async(req, res, next)=> {
+orderRouter.get('/orders/:fullOrderId', loginRequired, async(req, res, next)=> {
     try{
-        const orderId = req.params.orderId;
-        const order = await orderService.getOneOrder(orderId);
+        req.body.userId = req.currentUserId;
+        const fullOrderId = req.params.fullOrderId;
+        const orderDate = fullOrderId.slice(0,-1);
+        const orderNumber = fullOrderId.slice(-1);
+        const order = await orderService.getOneOrder(orderDate, orderNumber);
         res.json(order)
+        return;
     } catch(err){
         next(err);
     }

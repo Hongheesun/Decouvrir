@@ -1,4 +1,6 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
+const autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(mongoose.connection);
 
 const OrderSchema = new Schema(
     {
@@ -39,10 +41,19 @@ const OrderSchema = new Schema(
             type: Date, 
             immutable: true,
              default: ()=> Date.now(),
-            }
+            }, 
+        orderNumber: {
+            type: Number, 
+            default: 0,
+        }
     }, {
         collection: 'orders',
     }
 )
-
+OrderSchema.plugin(autoIncrement.plugin, {
+    model: 'OrderModel',
+    field: 'orderNumber',
+    startAt: 0,
+    increment: 1
+})
 export { OrderSchema };

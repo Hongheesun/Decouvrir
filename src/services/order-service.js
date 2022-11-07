@@ -7,7 +7,7 @@ class OrderService {
     }
 
         async addOrder(orderInfo) {
-        const { email, products, address, phoneNumber } = orderInfo;
+        const { userId, products, address, phoneNumber } = orderInfo;
         // 날짜로 주문번호 생성
         const newDate = new Date();
         function formatDate(newDate){
@@ -21,6 +21,7 @@ class OrderService {
           return acc.price + curr.price;
       }); 
         const deliveryStatus = "상품준비중";
+        const email = userId; // user 스키마에 userId 필드 auto-increment로 수정하기
         const newOrderInfo = { email, orderId, products, totalPrice, address, phoneNumber, deliveryStatus};
         const order = orderModel.create(newOrderInfo);
         return order;
@@ -33,13 +34,13 @@ class OrderService {
       return orderModel.update(orderId, update);
     }
 
-    async getOneOrder(orderId){
-      return await orderModel.find(orderId);
+    async getOneOrder(orderDate, orderNumber){
+      return await orderModel.find(orderDate, orderNumber);
     }
-
-    async getAllOrders(){
-      return await orderModel.findAll();
-    }
+// orderService.getAllOrders(req.body.userId);
+    async getAllOrders(userId){
+      return await orderModel.findAll(userId);
+    } // userId에 맞는 주문 다 가져오기
 
     async deleteOrder(orderId){
       return await orderModel.delete(orderId);
