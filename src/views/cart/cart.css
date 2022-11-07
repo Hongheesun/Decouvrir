@@ -1,0 +1,103 @@
+body {
+    background-color: black;
+    color: white;
+    height: 100vh;
+}
+
+main {
+    width: 80%;
+    margin: 0px 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart {
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 10px;
+    border-bottom: thin solid white;
+}
+
+.buttons-container {
+    margin-top: 10px;
+}
+ 
+.all-item-delete-btn {
+    background-color: transparent;
+    cursor: pointer;
+    border: 0.5px solid #f0aa41;
+    color: #f0aa41;
+}
+
+.cart-item-list {
+    list-style: none;
+}
+
+.cart-item {
+    font-size: 15px;
+    display: flex;
+    padding: 20px 0;
+    border-bottom: 0.5px solid #d2d2d2;
+}
+
+.cart-item-column {
+    position: relative;
+}
+
+.item-info-left {
+    width: 50%;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.work-name, 
+.work-price {
+    font-weight: 700;
+    margin: 0;
+}
+
+.item-info-right {
+    width: 25%;
+    text-align: right;
+}
+
+ .item-delete-btn {
+    border: 0;
+    background-color: transparent;
+    color: #ffd18c;
+    border-bottom: 0.3px solid #ffd18c;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+ }
+
+.buttons-container {
+    display: flex;
+    justify-content: end;
+}
+
+.cart-total {
+    margin: 10px 0;
+    font-weight: 700;
+    justify-content: space-between;
+}
+
+.cart-total-price {
+    display: inline-block;
+    text-align: right;
+}
+
+.all-item-order-btn {
+    width: 100%;
+    background-color: #f0aa41;
+    border: none;
+    color: white;
+    height: 50px;
+    margin: 20px 0;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+  
