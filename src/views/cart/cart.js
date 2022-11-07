@@ -52,10 +52,13 @@ const itemDeleteBtn = document.querySelector(".item-delete-btn");
 
 function itemDelete() {
     // modal 또는 윈도우 창으로 삭제할건지 물어보기
-    console.log(this);
-    const newCartList = []; // filter를 통해서 해당하는 상품 id와 같지 않은 걸로 구성하고 싶음. 
-    localStorage.setItem("cart", JSON.stringify(newCartList));
-    addCartItemList(newCartList);
+    if(window.confirm("선택하신 상품을 장바구니에서 삭제하시겠습니까?")) {
+        const newCartList = JSON.parse(localStorage.getItem("cart")).filter(elem => {
+            
+        }); // filter를 통해서 해당하는 상품 id와 같지 않은 걸로 구성하고 싶음. 
+        localStorage.setItem("cart", JSON.stringify(newCartList));
+        addCartItemList(newCartList);
+    }
 }
 
 itemDeleteBtn.addEventListener("click", itemDelete);
@@ -65,8 +68,10 @@ itemDeleteBtn.addEventListener("click", itemDelete);
 const allDeleteBtn = document.querySelector(".all-item-delete-btn");
 
 function allDelete() {
-    localStorage.removeItem("cart");
-    addCartItemList(); // 이게 맞는지 물어보자
+    if(window.confirm("전체 상품을 장바구니에서 삭제하시겠습니까?")){
+        localStorage.removeItem("cart");
+        addCartItemList(); // 이게 맞는지 물어보자
+    }
 }
 
 allDeleteBtn.addEventListener("click", allDelete);
@@ -77,8 +82,12 @@ const buyAllBtn = document.querySelector(".all-item-order-btn");
 
 function buyAllItem(){
 
-    const buyList = [];
-    // JSON.parse(localStorage.getItem("cart")).forEach(elem => )
+    const buyList = JSON.parse(localStorage.getItem("cart")).map(elem => {
+        return {
+            productId: elem._id,
+            price: elem.price,
+        };
+    });
     localStorage.setItem("buy", JSON.stringify(buyList));
 }
 

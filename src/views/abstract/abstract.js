@@ -18,6 +18,7 @@ async function renderProducts() {
       <button class="delete-button" onClick="deleteProduct(${data["seq"]})" >삭제하기</button>
       
       <button class="open-toggle-button" onClick="showToggle()">수정하기</button> 
+      <button class="open-toggle-button" onClick="addCart(${data["seq"]})">장바구니</button> 
 
       <form class="toggle-page">
         <button class="closeBtn" onClick="closeToggle()">X</button>
@@ -141,3 +142,93 @@ function updateProduct(seq) {
 }
 
 // togglePage.addEventListener("submit", updateProduct(seq));
+
+
+
+
+////////   장바구니 
+// function addCart(seq){
+//   console.log("click")
+//   let cartList = JSON.parse(localStorage.getItem("cart"));
+//   if(cartList === null){
+//       cartList = [];
+//   }
+//   //const price = data["price"];
+//   // const [artistName, productName] = document.querySelector(data["price"]).textContent.split(" | ");
+
+//   // 작품이름, 가격, 이미지 + 작가이름 + 프로덕트 아이디
+//   const wantToCart = {
+//       // name: data["productName"],
+//       // price: data["price"],
+//       // image: data["image"],
+//       // artistName: data["painterEmail"],
+//       productId: seq,
+//   }
+//   // 기존 장바구니 리스트에 현재 작품이 있다면 error?
+
+//   // 기존 장바구니 리스트에 현재 작품까지 넣음.
+//   cartList.push(wantToCart);
+
+//   // 로컬스토리지에 추가
+//   localStorage.setItem("cart", JSON.stringify(cartList));
+// }
+
+
+
+function addCart(seq){
+  console.log("click")
+  let cartList = JSON.parse(localStorage.getItem("cart"));
+  if(cartList === null){
+      cartList = [];
+  }
+  //const price = data["price"];
+  // const [artistName, productName] = document.querySelector(data["price"]).textContent.split(" | ");
+  
+  // 작품이름, 가격, 이미지 + 작가이름 + 프로덕트 아이디
+  const wantToCart = {
+      // name: data["productName"],
+      // price: data["price"],
+      // image: data["image"],
+      // artistName: data["painterEmail"],
+      productId: seq,
+  }
+  // 기존 장바구니 리스트에 현재 작품이 있다면 error?
+  if(cartList.length == 0){
+    cartList.push(wantToCart);
+    localStorage.setItem("cart", JSON.stringify(cartList));
+  }
+  else{
+    cartList.forEach(data =>{
+      if(data["productId"] == seq){
+        alert("존재")
+      } 
+      
+    })
+    cartList.push(wantToCart);
+    localStorage.setItem("cart", JSON.stringify(cartList));
+  }
+  // 기존 장바구니 리스트에 현재 작품까지 넣음.
+  
+
+  // 로컬스토리지에 추가
+  
+}
+
+
+// addCartBtn.addEventListener("click", addCart);
+
+
+// 구매하기 +
+const buyBtn = document.querySelector(".BuyNow");
+
+function buyNow(){
+  const price = Number(document.querySelector("#work-price").textContent.replace("원", ""));
+
+  const buyList = {
+      productId: document.querySelector("#product-id").name,
+      price: price,
+  }
+  localStorage.setItem("buy", JSON.stringify(buyList));
+}
+
+buyBtn.addEventListener("click", buyNow);

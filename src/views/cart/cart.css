@@ -81,6 +81,7 @@ main {
 .cart-total {
     margin: 10px 0;
     font-weight: 700;
+    display:flex;
     justify-content: space-between;
 }
 
