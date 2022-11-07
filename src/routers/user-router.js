@@ -22,7 +22,7 @@ userRouter.post("/register", async (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    // 위 데이터를 유저 db에 추가하기
+    // 위 데이터를 유저 db에 추가
     const newUser = await userService.addUser({
       fullName,
       email,
@@ -30,7 +30,6 @@ userRouter.post("/register", async (req, res, next) => {
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
-    // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
     res.status(201).json(newUser);
   } catch (error) {
     next(error);
@@ -55,13 +54,13 @@ userRouter.post("/login", async function (req, res, next) {
     const userToken = await userService.getUserToken({ email, password });
 
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
-    res.status(200).json(userToken);
+    res.status(200).json({userToken});
   } catch (error) {
     next(error);
   }
 });
 
-// 전체 유저 목록을 가져옴 (배열 형태임)
+// 전체 유저 목록을 가져옴 (배열 형태)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 userRouter.get("/userlist", loginRequired, async function (req, res, next) {
   try {
@@ -78,37 +77,31 @@ userRouter.get("/userlist", loginRequired, async function (req, res, next) {
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 userRouter.patch(
-  "/users/:userId",
+  "/users/:userNumber",
   loginRequired,
   async function (req, res, next) {
     try {
-      // content-type 을 application/json 로 프론트에서
-      // 설정 안 하고 요청하면, body가 비어 있게 됨.
       if (is.emptyObject(req.body)) {
         throw new Error(
           "headers의 Content-Type을 application/json으로 설정해주세요"
         );
       }
 
-      // params로부터 id를 가져옴
-      const userId = req.params.userId;
+      // params로부터 userNumber를 가져옴(요청할 때 가독성을 위해 설정)
+      const userNumber = req.params.userNumber;
+      // login-required에서 설정해준 현재 로그인 된 id
+      const userId = req.currentUserId;
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
-      const fullName = req.body.fullName;
-      const password = req.body.password;
-      const address = req.body.address;
-      const phoneNumber = req.body.phoneNumber;
-      const role = req.body.role;
-
-      // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
-      const currentPassword = req.body.currentPassword;
+      // 확인용으로 사용할 현재 비밀번호도 추출
+      const { fullName, password, address, phoneNumber, role, currentPassword } = req.body
 
       // currentPassword 없을 시, 진행 불가
       if (!currentPassword) {
         throw new Error("정보를 변경하려면, 현재의 비밀번호가 필요합니다.");
       }
 
-      const userInfoRequired = { userId, currentPassword };
+      const userInfo = { userId, currentPassword, userNumber };
 
       // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
       // 보내주었다면, 업데이트용 객체에 삽입함.
@@ -122,7 +115,7 @@ userRouter.patch(
 
       // 사용자 정보를 업데이트함.
       const updatedUserInfo = await userService.setUser(
-        userInfoRequired,
+        userInfo,
         toUpdate
       );
 

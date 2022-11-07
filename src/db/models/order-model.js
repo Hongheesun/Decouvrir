@@ -9,9 +9,8 @@ export class OrderModel {
         return createdOrder;
       } 
 
-
-      async update(orderId, update){
-        return await Order.updateOne({orderId}, update)
+      async update(userId, orderDate, orderNumber, update){
+        return await Order.findOneAndUpdate({userId, orderId: orderDate, orderNumber}, update)
       }
 
       async find(orderDate, orderNumber) {
@@ -22,7 +21,7 @@ export class OrderModel {
      async findAll(userId) {
       const orders = await Order.find({ email: userId });
       return orders;
-   } // document 중에서 userId 값이 userId인 document 다 찾아서 보여주기
+   }
 
    async findAllAdmin() {
     const order = await Order.find({});
