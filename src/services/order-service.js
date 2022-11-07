@@ -28,10 +28,10 @@ class OrderService {
       }
 
 
-    async setOrder(orderId, orderInfo){
-      const { address, phoneNumber } = orderInfo;
+    async setOrder(orderDate, orderNumber, orderInfo){
+      const { userId, address, phoneNumber } = orderInfo;
       const update = {address, phoneNumber};
-      return orderModel.update(orderId, update);
+      return orderModel.update(userId, orderDate, orderNumber, update);
     }
 
     async getOneOrder(orderDate, orderNumber){

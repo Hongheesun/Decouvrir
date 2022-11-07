@@ -20,14 +20,17 @@ try{
 });
 
 //주문 수정
-orderRouter.patch('/orders/:orderId', async(req, res, next)=> {
+orderRouter.patch('/orders/:fullOrderId', loginRequired, async(req, res, next)=> {
     try{
-         const orderId = req.params.orderId;
+        req.body.userId = req.currentUserId;
+        const fullOrderId = req.params.fullOrderId;
+        const orderDate = fullOrderId.slice(0,8);
+        const orderNumber = fullOrderId.slice(8);
 
-        const updatedOrder = await orderService.setOrder(orderId, req.body)
+        await orderService.setOrder(orderDate, orderNumber, req.body)
+        // 해당 user인지 userId도 확인해야함
         res.json({
             message: '주문 정보 수정 성공',
-            data: updatedOrder,
         })
     }
  catch(err){
@@ -48,8 +51,9 @@ orderRouter.get('/orders/:fullOrderId', loginRequired, async(req, res, next)=> {
     try{
         req.body.userId = req.currentUserId;
         const fullOrderId = req.params.fullOrderId;
-        const orderDate = fullOrderId.slice(0,-1);
-        const orderNumber = fullOrderId.slice(-1);
+        const orderDate = fullOrderId.slice(0,8);
+        const orderNumber = fullOrderId.slice(8);
+        // console.log(orderDate, orderNumber);
         const order = await orderService.getOneOrder(orderDate, orderNumber);
         res.json(order)
         return;
