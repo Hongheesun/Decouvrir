@@ -13,7 +13,7 @@ class ProductService {
   async getproducts() { 
     return await this.productModel.findAll();
   }
-
+  //특정 상품 받음
   async getproduct(seq) {
     return await this.productModel.findById(seq);
   }
@@ -42,6 +42,10 @@ class ProductService {
   //카테고리별 상품
   async getCategoryProducts(categoryId, page, perPage) {
     return await this.productModel.findByCategoryId(categoryId, page, perPage);
+  }
+  //painter의 상품 가져옴
+  async getproductsPainter(painterEmail) {
+    return await this.productModel.findBypainter(painterEmail);
   }
 }
 
