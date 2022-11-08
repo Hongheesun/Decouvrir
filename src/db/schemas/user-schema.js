@@ -1,7 +1,13 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
+const autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(mongoose.connection);
 
 const UserSchema = new Schema(
   {
+    userNumber: {
+      type:Number,
+      default: 0,
+    },
     email: {
       type: String,
       required: true,
@@ -42,5 +48,12 @@ const UserSchema = new Schema(
     timestamps: true,
   }
 );
+
+UserSchema.plugin(autoIncrement.plugin, {
+  model: 'UserModel',
+  field: 'userNumber',
+  startAt: 0,
+  increment: 1
+})
 
 export { UserSchema };
