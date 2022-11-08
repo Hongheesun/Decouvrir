@@ -4,6 +4,7 @@ let cartList = JSON.parse(localStorage.getItem("cart"));
 // 로컬스토리지에 있는 장바구니 리스트 화면에 출력
 function addCartItemList(cartList) {
     let cartListContent = "";
+    console.log('cartList: ', cartList);
     if(cartList !== null && cartList.length !== 0){
         cartList.forEach(item => {
             cartListContent += ` 
@@ -20,7 +21,7 @@ function addCartItemList(cartList) {
                     </div>
                     <div class="cart-item-column item-info-right">
                     <p class="work-price">${item.price} 원</p>
-                    <button class="item-delete-btn" type="button">삭제</button>
+                    <button class="item-delete-btn"  id=${item.productId} type="button">삭제</button>
                     </div>
                 </li>`;
             document.querySelector(".cart-total-price").innerHTML = `${totalPrice(cartList)}원`;
@@ -28,11 +29,15 @@ function addCartItemList(cartList) {
         });    
     }
     else {
-        cartItemList += "장바구니에 담긴 상품이 없습니다."
+        cartListContent += "장바구니에 담긴 상품이 없습니다."
         document.querySelector(".cart-total").style.display = 'none';
-        document.querySelectorAll(".buttons-container").style.display = 'none';
+        for (const btn of document.querySelectorAll(".buttons-container")) {
+            btn.style.display = 'none';
+        }
     }
+    console.log('cartListContent: ', cartListContent);
     cartItemList.innerHTML = cartListContent;
+    
 }
 addCartItemList(cartList);
 
@@ -47,30 +52,35 @@ function totalCount(cartList) {
 }
 
 
-// todo: 개별 cart list 삭제
-const itemDeleteBtn = document.querySelector(".item-delete-btn");
+// 개별 cart list 삭제
+const itemDeleteBtns = document.querySelectorAll(".item-delete-btn");
 
-function itemDelete() {
-    // modal 또는 윈도우 창으로 삭제할건지 물어보기
+function itemDelete(e) {
     if(window.confirm("선택하신 상품을 장바구니에서 삭제하시겠습니까?")) {
         const newCartList = JSON.parse(localStorage.getItem("cart")).filter(elem => {
-            
-        }); // filter를 통해서 해당하는 상품 id와 같지 않은 걸로 구성하고 싶음. 
+            return elem.productId !== Number(e.target.id);
+        });
         localStorage.setItem("cart", JSON.stringify(newCartList));
         addCartItemList(newCartList);
     }
+    
 }
 
-itemDeleteBtn.addEventListener("click", itemDelete);
+for (const btn of itemDeleteBtns) {
+    btn.addEventListener("click", itemDelete);
+}
 
 
-// todo: 전체 상품 삭제
+
+// 전체 cart list 삭제
 const allDeleteBtn = document.querySelector(".all-item-delete-btn");
 
 function allDelete() {
+    console.log(localStorage.getItem("cart"));
     if(window.confirm("전체 상품을 장바구니에서 삭제하시겠습니까?")){
         localStorage.removeItem("cart");
-        addCartItemList(); // 이게 맞는지 물어보자
+        addCartItemList([]); 
+        window.location.reload();
     }
 }
 
@@ -81,15 +91,19 @@ allDeleteBtn.addEventListener("click", allDelete);
 const buyAllBtn = document.querySelector(".all-item-order-btn");
 
 function buyAllItem(){
-
     const buyList = JSON.parse(localStorage.getItem("cart")).map(elem => {
         return {
-            productId: elem._id,
-            price: elem.price,
+            productId: elem.productId,
         };
     });
     localStorage.setItem("buy", JSON.stringify(buyList));
+
+    // 로그인을 하지 않은 경우 
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+        alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
+        window.location.replace("/login?order");
+    }
 }
 
-buyBtn.addEventListener("click", buyAllItem);
-
+buyAllBtn.addEventListener("click", buyAllItem);
