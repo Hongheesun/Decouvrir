@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-import { viewsRouter, userRouter, orderRouter, productRouter } from "./routers";
+import { viewsRouter, userRouter, productRouter, categoryRouter } from "./routers";
 import { errorHandler } from "./middlewares";
 const fs = require("fs");
 
