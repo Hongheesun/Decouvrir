@@ -17,17 +17,10 @@ userRouter.post("/register", async (req, res, next) => {
       );
     }
 
-    // req (request)의 body 에서 데이터 가져오기
-    const fullName = req.body.fullName;
-    const email = req.body.email;
-    const password = req.body.password;
+    const { fullName, password, email } = req.body
+    const newUserInfo = { fullName, password, email }
 
-    // 위 데이터를 유저 db에 추가
-    const newUser = await userService.addUser({
-      fullName,
-      email,
-      password,
-    });
+    const newUser = await userService.addUser(newUserInfo);
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
     res.status(201).json(newUser);
@@ -73,6 +66,16 @@ userRouter.get("/userlist", loginRequired, async function (req, res, next) {
     next(error);
   }
 });
+
+userRouter.get("/user", loginRequired, async function(req, res, next) {
+  try{
+    const userId = req.currentUserId;
+    const user = await userService.getOneUser(userId);
+    res.json(user);
+  } catch (error){
+    next(error)
+  }
+})
 
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)

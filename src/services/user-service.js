@@ -76,6 +76,11 @@ class UserService {
     return users;
   }
 
+  async getOneUser(userId){
+    const user = await this.userModel.findOneUser(userId);
+    return user;
+  }
+
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능
   async setUser(userInfo, toUpdate) {
     const { userId, currentPassword, userNumber } = userInfo;
