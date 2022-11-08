@@ -39,6 +39,10 @@ class ProductService {
     let product = await productModel.delete(seq);
     return product;
   }
+  //카테고리별 상품
+  async getCategoryProducts(categoryId, page, perPage) {
+    return await this.productModel.findByCategoryId(categoryId, page, perPage);
+  }
 }
 
 const productService = new ProductService(productModel);

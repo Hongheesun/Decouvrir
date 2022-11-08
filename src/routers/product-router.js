@@ -38,7 +38,7 @@ productRouter.patch('/:seq', async(req, res, next) => {
             ...(content && { content }),
             ...(category && { category }),
             ...(image && { image }),
-
+            ...(categoryId && { categoryId }),
         }
 
         const updateProduct = await productService.setProduct(seq, toUpdate);
