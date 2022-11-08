@@ -17,8 +17,8 @@ userRouter.post("/register", async (req, res, next) => {
       );
     }
 
-    const { fullName, password, email } = req.body
-    const newUserInfo = { fullName, password, email }
+    const { fullName, password, email, phoneNumber } = req.body;
+    const newUserInfo = { fullName, password, email, phoneNumber };
 
     const newUser = await userService.addUser(newUserInfo);
 
@@ -47,7 +47,7 @@ userRouter.post("/login", async function (req, res, next) {
     const userToken = await userService.getUserToken({ email, password });
 
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
-    res.status(200).json({userToken});
+    res.status(200).json({ userToken });
   } catch (error) {
     next(error);
   }
@@ -67,15 +67,16 @@ userRouter.get("/userlist", loginRequired, async function (req, res, next) {
   }
 });
 
-userRouter.get("/user", loginRequired, async function(req, res, next) {
-  try{
+userRouter.get("/user", loginRequired, async function (req, res, next) {
+  try {
     const userId = req.currentUserId;
     const user = await userService.getOneUser(userId);
     res.json(user);
-  } catch (error){
-    next(error)
+    // res.status(200).json(currentUserInfo);
+  } catch (error) {
+    next(error);
   }
-})
+});
 
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
@@ -97,7 +98,14 @@ userRouter.patch(
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
       // 확인용으로 사용할 현재 비밀번호도 추출
-      const { fullName, password, address, phoneNumber, role, currentPassword } = req.body
+      const {
+        fullName,
+        password,
+        address,
+        phoneNumber,
+        role,
+        currentPassword,
+      } = req.body;
 
       // currentPassword 없을 시, 진행 불가
       if (!currentPassword) {
@@ -117,10 +125,7 @@ userRouter.patch(
       };
 
       // 사용자 정보를 업데이트함.
-      const updatedUserInfo = await userService.setUser(
-        userInfo,
-        toUpdate
-      );
+      const updatedUserInfo = await userService.setUser(userInfo, toUpdate);
 
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
       res.status(200).json(updatedUserInfo);
