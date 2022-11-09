@@ -13,7 +13,12 @@ const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
 const saveButton = document.querySelector("#saveButton");
 
-saveButton.addEventListener("click", updateUserData);
+const modal = document.querySelector("#modal");
+const saveCompleteButton = document.querySelector("#saveCompleteButton");
+const currentPasswordInput = document.querySelector("#currentPasswordInput");
+//saveButton.addEventListener("click", updateUserData);
+saveButton.addEventListener("click", openModal);
+saveCompleteButton.addEventListener("click", updateUserData);
 
 let userData;
 async function insertUserData() {
@@ -47,7 +52,7 @@ insertUserData();
 
 //// 유저 정보 수정하기 ////
 async function updateUserData() {
-  const data = {};
+  // const data = {};
   const fullName = fullNameInput.value;
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
@@ -55,7 +60,7 @@ async function updateUserData() {
   // const address1 = address1Input.value;
   // const address2 = address2Input.value;
   const phoneNumber = phoneNumberInput.value;
-  // const currentPassword = currentPasswordInput.value;
+  const currentPassword = currentPasswordInput.value;
 
   const isPasswordLong = password.length >= 4;
   const isPasswordSame = password === passwordConfirm;
@@ -74,7 +79,7 @@ async function updateUserData() {
     return alert("비밀번호와 비밀번호확인이 일치하지 않습니다.");
   }
 
-  // const data = { currentPassword };
+  const data = { currentPassword };
 
   // 초기값과 다를 경우 api 요청에 사용할 data 객체에 넣어줌
   console.log(userData.fullName);
@@ -115,4 +120,19 @@ async function updateUserData() {
   }
 }
 
-// saveButton.addEventListener("click", saveUserData);
+// Modal 창 열기
+function openModal(e) {
+  e.preventDefault();
+
+  modal.classList.add("is-active");
+  currentPasswordInput.focus();
+}
+
+// Modal 창 닫기
+function closeModal(e) {
+  if (e) {
+    e.preventDefault();
+  }
+
+  modal.classList.remove("is-active");
+}

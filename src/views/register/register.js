@@ -7,9 +7,14 @@ const emailInput = document.querySelector("#emailInput");
 const passwordInput = document.querySelector("#passwordInput");
 const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
+const painterNameInput = document.querySelector("#painterNameInput");
+const introduceInput = document.querySelector("#introduceInput");
 
 const submitButton = document.querySelector("#submitButton");
-
+const painterToggle = document.querySelector(".toggle-switch");
+// const painterRegisterPage = document.querySelector(
+//   ".painter-user-form-container"
+// );
 addAllElements();
 addAllEvents();
 
@@ -19,6 +24,14 @@ async function addAllElements() {}
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
   submitButton.addEventListener("click", handleSubmit);
+  painterToggle.addEventListener("click", showPainterRegister);
+}
+
+function showPainterRegister() {
+  const painterRegisterPage = document.querySelector(
+    ".painter-user-form-container"
+  );
+  painterRegisterPage.style.display = "block";
 }
 
 // 회원가입 진행
@@ -30,6 +43,9 @@ async function handleSubmit(e) {
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
   const phoneNumber = phoneNumberInput.value;
+
+  const painterName = painterNameInput.value;
+  const introduce = introduceInput.value;
 
   // 잘 입력했는지 확인
   const isFullNameValid = fullName.length >= 2;
@@ -51,7 +67,14 @@ async function handleSubmit(e) {
 
   // 회원가입 api 요청
   try {
-    const data = { fullName, email, password, phoneNumber };
+    const data = {
+      fullName,
+      email,
+      password,
+      phoneNumber,
+      painterName,
+      introduce,
+    };
 
     await Api.post("/api/register", data);
 

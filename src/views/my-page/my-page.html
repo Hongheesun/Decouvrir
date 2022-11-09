@@ -1,27 +1,93 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-   
-    <title>마이페이지</title>
-    <script src="../include/include.js" defer></script>
-    <script src="https://kit.fontawesome.com/58adb12a8e.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="../include/header.css" />
-    <link rel="stylesheet" href="../include/sidemenu.css" />
-    <!-- <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    /> -->
-    <link rel="stylesheet" href="./my-page.css" />
-  </head>
-  <body>
-    <header data-include="../include/header.html"></header>
-    <div id="container">
-      <aside data-include="../include/sidemenu.html"></aside>
-      <!--추가하면 됨.-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+  <title>마이페이지</title>
+  <script src="../include/include.js" defer></script>
+  <script src="https://kit.fontawesome.com/58adb12a8e.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="../include/header.css" />
+  <link rel="stylesheet" href="../include/sidemenu.css" />
+  <link rel="stylesheet" href="./my-page.css" />
+  <!-- Daum 주소 API 사용하기 위한 파일 -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+  <script src="./my-page-test.js" type="module" defer></script>
+
+</head>
+
+<body>
+  <header data-include="../include/header.html"></header>
+  <!-- <aside data-include="../include/sidemenu.html"></aside> -->
+  <h1 class="subtitle is-4" id="securityTitle">회원정보 관리</h1>
+
+  <!-- 로그인 폼(Form) -->
+  <section class="main-wrapper">
+    <div class="login-wrapper">
+      <form>
+        <span>회원정보</span>
+        <div class="input-wrapper">
+          <label class="label" for="fullNameInput">이름</label>
+          <div class="control">
+            <input class="input" id="fullNameInput" type="text" autocomplete="off" />
+
+
+            <div class="field">
+              <label class="label" for="passwordInput">비밀번호</label>
+              <div class="control">
+                <input class="input" id="passwordInput" type="password" autocomplete="off" />
+
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="passwordConfirmInput">비밀번호 확인</label>
+              <div class="control">
+                <input class="input" id="passwordConfirmInput" type="password" autocomplete="off" />
+              </div>
+            </div>
+
+            <label class="label" for="addressInput">주소</label>
+            <div class="control">
+              <input class="input" id="addressInput" type="text" autocomplete="off" />
+
+
+
+
+              <label class="label" for="phoneNumberInput">전화번호</label>
+              <div class="control">
+                <input class="input" id="phoneNumberInput" type="text" autocomplete="off" />
+
+
+                <button class="button button-submit is-info is-fullwidth js-modal-trigger" id="saveButton"
+                  data-target="modal-js-example">
+                  저장하기
+                </button>
+
+                <!-- 정보 수정을 완료하기 위해, 현재 비밀번호를 입력할 Modal 창 -->
+                <div id="modal" class="modal">
+                  <div class="modal-background" id="modalBackground"></div>
+                  <div class="modal-content">
+                    <button class="delete is-large" id="modalCloseButton" aria-label="close"></button>
+                    <div class="box">
+                      <p class="mb-3">현재 비밀번호를 입력해 주세요.</p>
+                      <input class="input is-link mb-3" id="currentPasswordInput" type="password" placeholder=""
+                        autocomplete="on" />
+                      <button class="button is-link mt-5" id="saveCompleteButton" aria-label="close">
+                        저장 완료하기
+                      </button>
+                    </div>
+                  </div>
+                </div>
+      </form>
+
     </div>
-  </body>
-  <footer></footer>
+  </section>
+
+  <!-- <footer data-include="../include/footer.html"></footer> -->
+</body>
+
 </html>
