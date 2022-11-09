@@ -42,14 +42,8 @@ const UserSchema = new Schema(
       required: false,
       default: "basic-user",
     },
-    painter: {
-      type: new Schema(
-        {
-          painterName: String,
-          introduce: String,
-        }
-      )
-    }
+    painterName: String,
+    introduce: String,
   },
   {
     collection: "users",
