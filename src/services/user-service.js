@@ -148,6 +148,10 @@ class UserService {
 
     return user;
   }
+
+  async deleteUser(userNumber) {
+    return await this.userModel.delete(userNumber);
+  }
 }
 
 const userService = new UserService(userModel);
