@@ -16,8 +16,8 @@ function addCartItemList(cartList) {
                     </div>
                     
                     <div class="cart-item-column item-info-left"> 
-                    <p class="work-name"><a>${item.name}</a></p>
-                    <p>${item.artistName}</p>
+                    <p class="work-name"><a>${item.productName}</a></p>
+                    <p>${item.painterName}</p>
                     </div>
                     <div class="cart-item-column item-info-right">
                     <p class="work-price">${item.price} 원</p>
@@ -91,12 +91,7 @@ allDeleteBtn.addEventListener("click", allDelete);
 const buyAllBtn = document.querySelector(".all-item-order-btn");
 
 function buyAllItem(){
-    const buyList = JSON.parse(localStorage.getItem("cart")).map(elem => {
-        return {
-            productId: elem.productId,
-        };
-    });
-    localStorage.setItem("buy", JSON.stringify(buyList));
+    localStorage.setItem("buy-cart", localStorage.getItem("cart"));
 
     // 로그인을 하지 않은 경우 
     const token = sessionStorage.getItem("token");
@@ -104,6 +99,7 @@ function buyAllItem(){
         alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
         window.location.replace("/login?order");
     }
+    window.location.replace("/order");
 }
 
 buyAllBtn.addEventListener("click", buyAllItem);
