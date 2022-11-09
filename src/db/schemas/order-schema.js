@@ -20,23 +20,22 @@ const OrderSchema = new Schema(
             type: Number,
             required: true,
         },
+        recipientName: {
+            type: String,
+            required: true,
+        },
+        recipientPhoneNumber: {
+            type: String,
+            required: true,
+        },
+        recipientAddress: {
+            type: String,
+            required: true,
+        },
         deliveryStatus: {
             type: String,
             required: true,
         },
-        address: {
-            type: new Schema({
-                postalCode:String,
-                address1: String,
-                address2: String,
-            },{_id:false}),
-            required: true,
-            default: {},
-        },
-        phoneNumber: {
-            type: String,
-            required: true },
-
         orderedAt: {
             type: Date, 
             immutable: true,

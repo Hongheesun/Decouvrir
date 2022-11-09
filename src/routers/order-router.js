@@ -1,9 +1,7 @@
 import { Router } from "express";
 import is from "@sindresorhus/is";
-// 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from "../middlewares";
 import { orderService } from "../services";
-import mongoose from "mongoose";
 
 
 const orderRouter = Router();
@@ -11,8 +9,10 @@ const orderRouter = Router();
 // 주문 생성
 orderRouter.post('/order', loginRequired, async(req, res, next)=> {
 try{
-    req.body.userId = req.currentUserId;
-    const newOrder = await orderService.addOrder(req.body)
+    req.body.userEmail = req.currentUserId;
+    const { userEmail, products,recipientName, recipientPhoneNumber, recipientAddress } = req.body;
+    const orderInfo = { userEmail, products,recipientName, recipientPhoneNumber, recipientAddress}
+    const newOrder = await orderService.addOrder(orderInfo)
       res.status(201).json(newOrder)
 } catch(err){
     next(err);
@@ -22,12 +22,13 @@ try{
 //주문 수정
 orderRouter.patch('/orders/:fullOrderId', loginRequired, async(req, res, next)=> {
     try{
-        req.body.userId = req.currentUserId;
+        req.body.userEmail = req.currentUserId;
         const fullOrderId = req.params.fullOrderId;
         const orderDate = fullOrderId.slice(0,8);
         const orderNumber = fullOrderId.slice(8);
-
-        await orderService.setOrder(orderDate, orderNumber, req.body)
+        const { userEmail, recipientName, recipientPhoneNumber, recipientAddress } = req.body;
+        const newOrderInfo = { userEmail, recipientName, recipientPhoneNumber, recipientAddress }
+        await orderService.setOrder(orderDate, orderNumber, newOrderInfo)
         // 해당 user인지 userId도 확인해야함
         res.json({
             message: '주문 정보 수정 성공',
