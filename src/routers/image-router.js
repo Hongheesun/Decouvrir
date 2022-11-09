@@ -1,25 +1,26 @@
+import dotenv from "dotenv";
 import AWS, { S3 } from 'aws-sdk';
 import multerS3 from 'multer-s3';
 import multer from 'multer';
 import { Router } from 'express';
-import dotenv from "dotenv";
 
 dotenv.config()
 
 const imageRouter = Router();
-console.log(process.env.AWS_ACCESS_KEY_ID);
+
+console.log(process.env.S3_ACCESS_KEY_ID);
 
 AWS.config.update({
         region: process.env.AWS_REGION,
         apiVersion: "latest",
         credentials: {
-            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+            accessKeyId: process.env.S3_ACCESS_KEY_ID,
+            secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
         }
     
 })
 
-const s3 = new AWS.S3;
+const s3 = new AWS.S3();
 
 const imageUpload = multer({
     storage: multerS3({
@@ -48,4 +49,4 @@ imageRouter.post('/upload', imageUpload.single('image'), async(req, res, next)=>
     }
 })
 
-export { imageRouter };
+export { imageRouter, imageUpload };
