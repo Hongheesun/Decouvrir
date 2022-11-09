@@ -133,8 +133,7 @@ async function updateUserData() {
     await Api.patch("/api/users", userNumber, data);
 
     alert("회원정보가 안전하게 저장되었습니다.");
-    // disableForm();
-    // closeModal();
+    /// disableForm();
     console.log(data);
   } catch (err) {
     alert(`회원정보 저장 과정에서 오류가 발생하였습니다: ${err}`);
