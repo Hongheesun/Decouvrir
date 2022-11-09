@@ -7,16 +7,16 @@ import { imageUpload } from "./image-router";
 const productRouter = Router();
 
 //상품 등록
-productRouter.post("/product", imageUpload.single('image'), async (req, res, next) => {
+productRouter.post("/product", async (req, res, next) => {
     try {
         if(is.emptyObject(req.body)) {
             throw new Error(
                 'create product error'
             );
         } 
-        console.log(req.file.location)
-        //req.body.image = req.file.location;
-        console.log(req.body.image)
+        // console.log(req.file.location)
+        // req.body.image = req.file.location;
+        // console.log(req.body.image)
         const newProduct = await productService.addProduct(req.body);
         res.status(201).json(newProduct);
     } catch (error) {
