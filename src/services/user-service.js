@@ -10,7 +10,16 @@ class UserService {
 
   // 회원가입
   async addUser(userInfo) {
-    const { email, fullName, password, phoneNumber, address } = userInfo;
+    const {
+      email,
+      fullName,
+      password,
+      phoneNumber,
+      address,
+      painterName,
+      introduce,
+      role,
+    } = userInfo;
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
@@ -31,6 +40,9 @@ class UserService {
       password: hashedPassword,
       phoneNumber,
       address,
+      painterName,
+      introduce,
+      role,
     };
 
     // db에 저장

@@ -1,0 +1,45 @@
+body {
+  background-color: black;
+  height: 120vh;
+  position: relative;
+}
+
+.wrapper {
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.monthly-painter-title {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 800;
+  margin: 40px 0 70px 0;
+}
+
+.painter-card {
+  width: 200px;
+  height: 200px;
+}
+
+/* .card {
+  max-height: fit-content;
+  border-radius: 0px;
+} */
+
+/* .card-header {
+  justify-content: center;
+  padding: 10px 0px;
+}
+
+.content {
+  text-align: center;
+}
+
+.card-footer {
+  padding: 0px;
+  max-height: fit-content;
+} */

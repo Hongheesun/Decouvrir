@@ -9,6 +9,7 @@ const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
 const painterNameInput = document.querySelector("#painterNameInput");
 const introduceInput = document.querySelector("#introduceInput");
+const addressInput = document.querySelector("#addressInput");
 
 const submitButton = document.querySelector("#submitButton");
 const painterToggle = document.querySelector(".toggle-switch");
@@ -43,16 +44,29 @@ async function handleSubmit(e) {
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
   const phoneNumber = phoneNumberInput.value;
+  const address = addressInput.value;
 
   const painterName = painterNameInput.value;
   const introduce = introduceInput.value;
+  let role = "";
+
+  if (painterName && !introduce) {
+    alert("둘 다 입력하세요!");
+  } else if (!painterName && introduce) {
+    alert("둘 다 입력하세요!");
+  }
+
+  if (painterName && introduce) {
+    role = "painter-user";
+  } else if (painterName == "" && introduce == "") {
+    role = "basic-user";
+  }
 
   // 잘 입력했는지 확인
   const isFullNameValid = fullName.length >= 2;
   const isEmailValid = validateEmail(email);
   const isPasswordValid = password.length >= 4;
   const isPasswordSame = password === passwordConfirm;
-
   if (!isFullNameValid || !isPasswordValid) {
     return alert("이름은 2글자 이상, 비밀번호는 4글자 이상이어야 합니다.");
   }
@@ -72,8 +86,10 @@ async function handleSubmit(e) {
       email,
       password,
       phoneNumber,
+      address,
       painterName,
       introduce,
+      role,
     };
 
     await Api.post("/api/register", data);

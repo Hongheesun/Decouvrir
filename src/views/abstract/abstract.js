@@ -1,5 +1,10 @@
+//import * as Api from "/api.js";
+
 async function getProducts() {
   let url = `/api/products`;
+  // const res = await Api.get(url);
+  // console.log(res);
+  // return res.json();
   try {
     let res = await fetch(url);
     return await res.json();
@@ -13,7 +18,7 @@ async function renderProducts() {
   console.log(products);
   let html = "";
   products.forEach((data) => {
-    if (data["category"] === "abstract") {
+    if (data["seq"] === "abstract") {
       let htmlSegment = `   <li class="work">
       <button class="delete-button" onClick="deleteProduct(${data["seq"]})" >삭제하기</button>
       
@@ -60,17 +65,26 @@ async function renderProducts() {
 renderProducts();
 
 function deleteProduct(seq) {
+  console.log(seq);
+
+  // Api.del(`/api`, seq);
   fetch(`/api/${seq}`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
   })
     // .then((res) => res.json())
     .then((data) => {
       console.log("delete 성공!");
       //   return data;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+    });
 
-  window.location.href = "/abstract";
+  window.location.reload();
 }
 
 /////////////////  updateProduct  /////////////////
@@ -210,18 +224,18 @@ function addCart(seq) {
 // addCartBtn.addEventListener("click", addCart);
 
 // 구매하기 +
-const buyBtn = document.querySelector(".BuyNow");
+// const buyBtn = document.querySelector(".BuyNow");
 
-function buyNow() {
-  const price = Number(
-    document.querySelector("#work-price").textContent.replace("원", "")
-  );
+// function buyNow() {
+//   const price = Number(
+//     document.querySelector("#work-price").textContent.replace("원", "")
+//   );
 
-  const buyList = {
-    productId: document.querySelector("#product-id").name,
-    price: price,
-  };
-  localStorage.setItem("buy", JSON.stringify(buyList));
-}
+//   const buyList = {
+//     productId: document.querySelector("#product-id").name,
+//     price: price,
+//   };
+//   localStorage.setItem("buy", JSON.stringify(buyList));
+// }
 
-buyBtn.addEventListener("click", buyNow);
+// buyBtn.addEventListener("click", buyNow);

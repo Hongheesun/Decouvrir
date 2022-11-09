@@ -8,10 +8,13 @@ const securityTitle = document.querySelector("#securityTitle");
 const fullNameInput = document.querySelector("#fullNameInput");
 const passwordInput = document.querySelector("#passwordInput");
 const addressInput = document.querySelector("#addressInput");
-
+const painterNameInput = document.querySelector("#painterNameInput");
+const introduceInput = document.querySelector("#introduceInput");
+const painterInputs = document.querySelector("#painterInputs");
 const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
 const saveButton = document.querySelector("#saveButton");
+const withdrawButton = document.querySelector("#withdrawButton");
 
 const modal = document.querySelector("#modal");
 const saveCompleteButton = document.querySelector("#saveCompleteButton");
@@ -19,6 +22,7 @@ const currentPasswordInput = document.querySelector("#currentPasswordInput");
 //saveButton.addEventListener("click", updateUserData);
 saveButton.addEventListener("click", openModal);
 saveCompleteButton.addEventListener("click", updateUserData);
+withdrawButton.addEventListener("click", userWithdraw);
 
 let userData;
 async function insertUserData() {
@@ -26,24 +30,27 @@ async function insertUserData() {
   userData = await Api.get("/api/user");
   console.log(userData);
 
-  // const securityTitle = document.querySelector("#securityTitle");
+  // const userData = userData;
 
-  const userDate = userData;
+  // const securityTitle = document.querySelector("#securityTitle");
+  if (userData.role === "painter-user") {
+    painterInputs.style.display = "block";
+  } else if (userData.role === "basic-user") {
+    painterInputs.style.display = "none";
+  }
 
   // 서버에서 온 비밀번호는 해쉬 문자열인데, 이를 빈 문자열로 바꿈
   // 나중에 사용자가 비밀번호 변경을 위해 입력했는지 확인하기 위함임.
   userData.password = "";
 
-  securityTitle.innerText = `회원정보 관리 (${userDate.email})`;
+  securityTitle.innerText = `회원정보 관리 (${userData.email})`;
 
-  fullNameInput.value = userDate.fullName;
-  passwordInput.value = userDate.password;
-  addressInput.value = userDate.address;
-  phoneNumberInput.value = userDate.phoneNumber;
-
-  // if (phoneNumber) {
-  //   phoneNumberInput.value = phoneNumber;
-  // }
+  fullNameInput.value = userData.fullName;
+  passwordInput.value = userData.password;
+  addressInput.value = userData.address;
+  phoneNumberInput.value = userData.phoneNumber;
+  painterNameInput.value = userData.painterName;
+  introduceInput.value = userData.introduce;
 
   // 크롬 자동완성 삭제함.
   passwordInput.value = "";
@@ -57,10 +64,12 @@ async function updateUserData() {
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
   // const postalCode = postalCodeInput.value;
-  // const address1 = address1Input.value;
+  const address = addressInput.value;
   // const address2 = address2Input.value;
   const phoneNumber = phoneNumberInput.value;
   const currentPassword = currentPasswordInput.value;
+  const painterName = painterNameInput.value;
+  const introduce = introduceInput.value;
 
   const isPasswordLong = password.length >= 4;
   const isPasswordSame = password === passwordConfirm;
@@ -94,7 +103,19 @@ async function updateUserData() {
     data.password = password;
   }
 
-  if (phoneNumber && phoneNumber !== userData.phoneNumber) {
+  if (address !== userData.address) {
+    data.address = address;
+  }
+
+  if (painterName !== userData.painterName) {
+    data.painterName = password;
+  }
+
+  if (introduce !== userData.Introduce) {
+    data.introduce = password;
+  }
+
+  if (phoneNumber !== userData.phoneNumber) {
     data.phoneNumber = phoneNumber;
   }
 
@@ -107,9 +128,9 @@ async function updateUserData() {
   }
 
   try {
-    const { _id } = userData;
+    const { userNumber } = userData;
     // db에 수정된 정보 저장
-    await Api.patch("/api/users", _id, data);
+    await Api.patch("/api/users", userNumber, data);
 
     alert("회원정보가 안전하게 저장되었습니다.");
     // disableForm();
@@ -119,6 +140,8 @@ async function updateUserData() {
     alert(`회원정보 저장 과정에서 오류가 발생하였습니다: ${err}`);
   }
 }
+
+function userWithdraw() {}
 
 // Modal 창 열기
 function openModal(e) {

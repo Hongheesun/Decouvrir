@@ -17,8 +17,26 @@ userRouter.post("/register", async (req, res, next) => {
       );
     }
 
-    const { fullName, password, email, phoneNumber } = req.body;
-    const newUserInfo = { fullName, password, email, phoneNumber };
+    const {
+      fullName,
+      password,
+      email,
+      phoneNumber,
+      address,
+      painterName,
+      introduce,
+      role,
+    } = req.body;
+    const newUserInfo = {
+      fullName,
+      password,
+      email,
+      phoneNumber,
+      address,
+      painterName,
+      introduce,
+      role,
+    };
 
     const newUser = await userService.addUser(newUserInfo);
 
@@ -55,7 +73,7 @@ userRouter.post("/login", async function (req, res, next) {
 
 // 전체 유저 목록을 가져옴 (배열 형태)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
-userRouter.get("/userlist", loginRequired, async function (req, res, next) {
+userRouter.get("/userlist", async function (req, res, next) {
   try {
     // 전체 사용자 목록을 얻음
     const users = await userService.getUsers();
