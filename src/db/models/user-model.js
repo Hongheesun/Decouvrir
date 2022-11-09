@@ -1,7 +1,6 @@
 import { model } from "mongoose";
 import { UserSchema } from "../schemas/user-schema";
 
-//
 const User = model("users", UserSchema);
 
 export class UserModel {
@@ -23,6 +22,11 @@ export class UserModel {
   async findAll() {
     const users = await User.find({});
     return users;
+  }
+
+  async findPainters(){
+    const painters = await User.find({role: "painter-user"})
+    return painters;
   }
 
   async update({ userNumber, userId, update }) {
