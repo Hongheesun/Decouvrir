@@ -129,5 +129,15 @@ userRouter.patch(
     }
   }
 );
+userRouter.delete("/user/:userNumber",  loginRequired ,async function(req, res, next) {
+  try {
+    const userNumber = req.params.userNumber;
+    await userService.deleteUser(userNumber);
+
+    res.status(200).json(userNumber);
+  } catch (error) {
+    next(error);
+  }
+})
 
 export { userRouter };

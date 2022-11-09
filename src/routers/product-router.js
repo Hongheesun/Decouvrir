@@ -1,12 +1,12 @@
 import { Router } from "express";
 import is from "@sindresorhus/is";
-import { loginRequired } from '../middlewares';
+import { loginRequired, painterOnly } from '../middlewares';
 import { productService } from "../services";
 
 const productRouter = Router();
 
 //상품 등록
-productRouter.post("/product", loginRequired ,async (req, res, next) => {
+productRouter.post("/product", loginRequired ,painterOnly, async (req, res, next) => {
     try {
         if(is.emptyObject(req.body)) {
             throw new Error(
@@ -35,7 +35,7 @@ productRouter.get("/products/:painter", async (req, res) => {
 })
 
 //상품 정보 수정
-productRouter.patch('/:seq', loginRequired ,async(req, res, next) => {
+productRouter.patch('/:seq', loginRequired ,painterOnly,async(req, res, next) => {
     try {
         const { seq } = req.params;
         const { productName, price, content, category, image } = req.body;
@@ -57,7 +57,7 @@ productRouter.patch('/:seq', loginRequired ,async(req, res, next) => {
 });
 
 //상품 삭제
-productRouter.delete('/:seq', loginRequired ,async(req, res, next) => {
+productRouter.delete('/:seq', loginRequired ,painterOnly,async(req, res, next) => {
     const { seq } = req.params;
     const deleteProduct = await productService.deleteProduct(seq);
 
