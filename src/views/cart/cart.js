@@ -1,4 +1,4 @@
-const cartItemList = document.querySelector("#cart-item-list");
+let cartItemList = document.querySelector("#cart-item-list");
 let cartList = JSON.parse(localStorage.getItem("cart"));
 
 // 로컬스토리지에 있는 장바구니 리스트 화면에 출력
@@ -90,7 +90,7 @@ allDeleteBtn.addEventListener("click", allDelete);
 // 주문하기 btn 
 const buyAllBtn = document.querySelector(".all-item-order-btn");
 
-function buyAllItem(){
+function buyAllItem(){t
     localStorage.setItem("buy-cart", localStorage.getItem("cart"));
 
     // 로그인을 하지 않은 경우 

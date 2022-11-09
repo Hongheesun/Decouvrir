@@ -1,6 +1,6 @@
 import * as Api from "/api.js";
 
-const orderItemList = document.querySelector("#order-list");
+let orderItemList = document.querySelector("#order-list");
 const buyList = JSON.parse(localStorage.getItem("buy-direct")) || JSON.parse(localStorage.getItem("buy-cart"));
 
 // order list 총 가격 구하기

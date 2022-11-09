@@ -1,29 +1,38 @@
+import * as Api from "/api.js";
+
+const productUrl = window.location.href.split("/");
+const productUrlName = productUrl[productUrl.length - 1];
 
 // 작품 data 가져오기
 async function getProductDetail() {
-    const productData = {
-        _id: "id",
-        painterEmail: "sda",
-        productName: "sdafds",
-        price: "1000",
-        content: "작품 설명",
-        category: "풍경화",
-        image: "fsd",
-    }; // 우선 임의로 저장. await로 product api받아오기...
+    const products = await Api.get("/api/products");;
+    const users = await Api.get("/api/userlist");
+    let painterEmail;
     
-    document.querySelector("#product-id").name = productData._id;
-    document.querySelector("#work-img").src= productData.image;
-    document.querySelector("#work-type").innerHTML= productData.category;
-    // 작가이름은 productData.painterEmail로 작가 스키마에서 찾아서 넣어야함
-    document.querySelector("#work-name").innerHTML= `${productData.painterEmail} | ${productData.productName}`;
-    document.querySelector("#work-price").innerHTML= productData.price + ' 원';
-    document.querySelector("#work-explain").innerHTML= productData.content;
+    products.forEach(productData => {
+        if(productData.productName === productUrlName){
+            document.querySelector("#product-id").name = productData._id;
+            document.querySelector("#work-img").src= productData.image;
+            document.querySelector("#work-type").innerHTML= productData.category;
+            painterEmail = productData.painterEmail;
+            document.querySelector("#work-name").innerHTML= `${productData.productName} | `;
+            document.querySelector("#work-price").innerHTML= productData.price + ' 원';
+            document.querySelector("#work-explain").innerHTML= productData.content;
+        }
+    })
+
+    users.forEach(user => {
+        if(user.email === painterEmail){
+            document.querySelector("#work-name").innerHTML += user.painter.painterName;
+        }
+    })
 }
+getProductDetail();
 
 // 장바구니 추가하기
 const addCartBtn = document.querySelector(".addCart");
 const price = Number(document.querySelector("#work-price").textContent.replace("원", ""));
-const [artistName, productName] = document.querySelector("#work-name").textContent.split(" | ");
+const [productName, painterName] = document.querySelector("#work-name").textContent.split(" | ");
 
 function addCart(){
     let cartList = JSON.parse(localStorage.getItem("cart"));
@@ -33,7 +42,7 @@ function addCart(){
 
     const wantToCart = {
         productName: productName,
-        painterName: artistName,
+        painterName: painterName,
         price: price,
         image: document.querySelector("#work-img").src,
         productId: document.querySelector("#product-id").name,
@@ -66,7 +75,7 @@ const buyBtn = document.querySelector(".BuyNow");
 function buyNow(){
     const buyList = [{
         productName: productName,
-        painterName: artistName,
+        painterName: painterName,
         price: price,
         image: document.querySelector("#work-img").src,
         productId: document.querySelector("#product-id").name,
