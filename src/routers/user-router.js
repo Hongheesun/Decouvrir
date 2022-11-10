@@ -1,5 +1,6 @@
 import { Router } from "express";
 import is from "@sindresorhus/is";
+// 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from "../middlewares";
 import { userService } from "../services";
 
@@ -8,32 +9,16 @@ const userRouter = Router();
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
 userRouter.post("/register", async (req, res, next) => {
   try {
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
       throw new Error(
         "headers의 Content-Type을 application/json으로 설정해주세요"
       );
     }
 
-    const {
-      fullName,
-      password,
-      email,
-      phoneNumber,
-      address,
-      painterName,
-      introduce,
-      role,
-    } = req.body;
-    const newUserInfo = {
-      fullName,
-      password,
-      email,
-      phoneNumber,
-      address,
-      painterName,
-      introduce,
-      role,
-    };
+    const { fullName, password, email, phoneNumber } = req.body;
+    const newUserInfo = { fullName, password, email, phoneNumber };
 
     const newUser = await userService.addUser(newUserInfo);
 
@@ -82,22 +67,12 @@ userRouter.get("/userlist", async function (req, res, next) {
   }
 });
 
-// 현재 로그인 된 user의 정보 get
 userRouter.get("/user", loginRequired, async function (req, res, next) {
   try {
     const userId = req.currentUserId;
     const user = await userService.getOneUser(userId);
     res.json(user);
     // res.status(200).json(currentUserInfo);
-  } catch (error) {
-    next(error);
-  }
-});
-
-userRouter.get("/monthlyPainter", async function (req, res, next) {
-  try {
-    const painters = await userService.getPainters();
-    res.json(painters);
   } catch (error) {
     next(error);
   }
