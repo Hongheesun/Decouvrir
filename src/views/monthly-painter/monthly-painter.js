@@ -18,8 +18,8 @@ async function renderMonthlyPainters() {
   let painters = await getPainters();
   console.log(painters);
   let html = "";
-  painters.forEach((data) => {
-    if (data["painterName"]) {
+  for (let i = 0; i < 3; i++) {
+    if (painters[i]["painterName"]) {
       let htmlSegment = `   
       <div class="painter-card">
           <span class="painter-name">${data["painterName"]}</span>
@@ -32,7 +32,22 @@ async function renderMonthlyPainters() {
 
       html += htmlSegment;
     }
-  });
+  }
+  // painters.forEach((data) => {
+  //   if (data["painterName"]) {
+  //     let htmlSegment = `
+  //     <div class="painter-card">
+  //         <span class="painter-name">${data["painterName"]}</span>
+  //         <span class="painter-introduce">${data["introduce"]}</span>
+  //       <div class="card-footer">
+  //         <a href="#" >작가 페이지</a>
+  //         <a href="#" >작품 보러가기</a>
+  //       </div>
+  //     </div>`;
+
+  //     html += htmlSegment;
+  //   }
+  //});
 
   let container = document.querySelector(".monthly-painters");
   container.innerHTML = html;

@@ -1,6 +1,12 @@
 import cors from "cors";
 import express from "express";
-import { viewsRouter, userRouter, productRouter, orderRouter, categoryRouter } from "./routers";
+import {
+  viewsRouter,
+  userRouter,
+  productRouter,
+  orderRouter,
+  categoryRouter,
+} from "./routers";
 import { errorHandler } from "./middlewares";
 const fs = require("fs");
 
@@ -32,6 +38,10 @@ app.use(express.static("views"));
 
 app.get("/image/background.mp4", (req, res) => {
   res.sendFile(__dirname + "/image/background.mp4");
+});
+
+app.get("/image/abstract", (req, res) => {
+  res.sendFile(__dirname + "/abstract");
 });
 
 // 순서 중요 (errorHandler은 다른 일반 라우팅보다 나중에 있어야 함)

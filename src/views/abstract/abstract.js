@@ -18,7 +18,7 @@ async function renderProducts() {
   console.log(products);
   let html = "";
   products.forEach((data) => {
-    if (data["seq"] === "abstract") {
+    if (data["category"] === "abstract") {
       let htmlSegment = `   <li class="work">
       <button class="delete-button" onClick="deleteProduct(${data["seq"]})" >삭제하기</button>
       
