@@ -23,7 +23,7 @@ async function addOrderItemList(buyList) {
                     
                     <div class="order-item-column item-info-left"> 
                     <p class="work-name"><a>${item.productName}</a></p>
-                    <p>${item.artistName}</p>
+                    <p>${item.paintertName}</p>
                     </div>
                     <div class="order-item-column item-info-right">
                     <p class="work-price">${item.price} 원</p>
