@@ -1,4 +1,3 @@
-// export default axiosPost;
 import * as Api from "../api";
 
 const postBtn = document.querySelector(".postButton");
