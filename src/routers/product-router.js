@@ -2,6 +2,8 @@ import { Router } from "express";
 import is from "@sindresorhus/is";
 import { loginRequired, painterOnly, myProduct } from '../middlewares';
 import { productService } from "../services";
+import { imageUpload } from "./image-router";
+
 
 const productRouter = Router();
 
@@ -13,6 +15,9 @@ productRouter.post("/product", loginRequired ,painterOnly, async (req, res, next
                 'create product error'
             );
         } 
+        // console.log(req.file.location)
+        // req.body.image = req.file.location;
+        // console.log(req.body.image)
         const newProduct = await productService.addProduct(req.body);
         res.status(201).json(newProduct);
     } catch (error) {

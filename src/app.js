@@ -1,12 +1,6 @@
 import cors from "cors";
 import express from "express";
-import {
-  viewsRouter,
-  userRouter,
-  productRouter,
-  orderRouter,
-  categoryRouter,
-} from "./routers";
+import { viewsRouter, userRouter, productRouter, orderRouter, categoryRouter, imageRouter } from "./routers";
 import { errorHandler } from "./middlewares";
 const fs = require("fs");
 
@@ -30,6 +24,7 @@ app.use(viewsRouter);
 app.use("/api", userRouter);
 app.use("/api", orderRouter);
 app.use("/api", productRouter);
+app.use("/api/images", imageRouter);
 app.use("/api/category", categoryRouter);
 
 // 동영상 업로드
