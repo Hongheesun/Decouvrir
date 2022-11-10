@@ -37,6 +37,11 @@ export class ProductModel {
         const totalPage = Math.ceil(total / perPage);
         return { products, total, totalPage }
     }
+
+        //작가 작품
+    async findBypainter(painterEmail) {
+        return await Product.find({painterEmail});
+    }
     
     
 }

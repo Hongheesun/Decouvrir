@@ -25,7 +25,13 @@ class UserService {
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUserInfo = { fullName, email, password: hashedPassword, phoneNumber, address};
+    const newUserInfo = {
+      fullName,
+      email,
+      password: hashedPassword,
+      phoneNumber,
+      address,
+    };
 
     // db에 저장
     const createdNewUser = await this.userModel.create(newUserInfo);
@@ -61,11 +67,14 @@ class UserService {
         "비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요."
       );
     }
-//
+    //
     // 로그인 성공 -> JWT 웹 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
 
-    const token = jwt.sign({ userId: user.email, fullName: user.fullName, role: user.role }, secretKey);
+    const token = jwt.sign(
+      { userId: user.email, fullName: user.fullName, role: user.role },
+      secretKey
+    );
 
     return token;
   }
@@ -76,7 +85,7 @@ class UserService {
     return users;
   }
 
-  async getOneUser(userId){
+  async getOneUser(userId) {
     const user = await this.userModel.findOneUser(userId);
     return user;
   }
@@ -126,6 +135,10 @@ class UserService {
     });
 
     return user;
+  }
+
+  async deleteUser(userNumber) {
+    return await this.userModel.delete(userNumber);
   }
 }
 

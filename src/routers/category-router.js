@@ -1,11 +1,12 @@
 import { Router } from "express";
 import is from "@sindresorhus/is";
+import { adminOnly } from "../middlewares/adminOnly";
 import { categoryService, productService } from '../services';
 
 const categoryRouter = Router();
 
 //카테고리 추가
-categoryRouter.post('/', async (req, res, next) => {
+categoryRouter.post('/', adminOnly ,async (req, res, next) => {
     const newCategory = await categoryService.addCategory(req.body);
     res.status(201).json(newCategory);
 
@@ -23,7 +24,7 @@ categoryRouter.get('/', async (req, res, next) => {
 })
 
 //삭제
-categoryRouter.delete('/:categoryId', async (req, res, next)=> {
+categoryRouter.delete('/:categoryId', adminOnly ,async (req, res, next)=> {
     try {
         const { categoryId } = req.params;
         const deleteCategory = await categoryService.deleteCategory(categoryId);
@@ -35,7 +36,7 @@ categoryRouter.delete('/:categoryId', async (req, res, next)=> {
 })
 
 //수정
-categoryRouter.patch('/:categoryId', async (req, res, next) => {
+categoryRouter.patch('/:categoryId', adminOnly ,async (req, res, next) => {
     try {
     const { categoryId } = req.params;
     const { categoryName } = req.body;

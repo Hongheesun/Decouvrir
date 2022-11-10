@@ -9,8 +9,8 @@ export class OrderModel {
         return createdOrder;
       } 
 
-      async update(userId, orderDate, orderNumber, update){
-        return await Order.findOneAndUpdate({userId, orderId: orderDate, orderNumber}, update)
+      async update(userEmail, orderDate, orderNumber, update){
+        return await Order.findOneAndUpdate({email: userEmail, orderId: orderDate, orderNumber}, update)
       }
 
       async find(orderDate, orderNumber) {

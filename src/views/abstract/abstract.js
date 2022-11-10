@@ -1,5 +1,10 @@
+//import * as Api from "/api.js";
+
 async function getProducts() {
   let url = `/api/products`;
+  // const res = await Api.get(url);
+  // console.log(res);
+  // return res.json();
   try {
     let res = await fetch(url);
     return await res.json();
@@ -60,15 +65,26 @@ async function renderProducts() {
 renderProducts();
 
 function deleteProduct(seq) {
+  console.log(seq);
+
+  // Api.del(`/api`, seq);
   fetch(`/api/${seq}`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
   })
-    .then((res) => res.json())
+    // .then((res) => res.json())
     .then((data) => {
       console.log("delete 성공!");
       //   return data;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+    });
+
+  window.location.reload();
 }
 
 /////////////////  updateProduct  /////////////////
@@ -143,10 +159,7 @@ function updateProduct(seq) {
 
 // togglePage.addEventListener("submit", updateProduct(seq));
 
-
-
-
-////////   장바구니 
+////////   장바구니
 // function addCart(seq){
 //   console.log("click")
 //   let cartList = JSON.parse(localStorage.getItem("cart"));
@@ -173,62 +186,56 @@ function updateProduct(seq) {
 //   localStorage.setItem("cart", JSON.stringify(cartList));
 // }
 
-
-
-function addCart(seq){
-  console.log("click")
+function addCart(seq) {
+  console.log("click");
   let cartList = JSON.parse(localStorage.getItem("cart"));
-  if(cartList === null){
-      cartList = [];
+  if (cartList === null) {
+    cartList = [];
   }
   //const price = data["price"];
   // const [artistName, productName] = document.querySelector(data["price"]).textContent.split(" | ");
-  
+
   // 작품이름, 가격, 이미지 + 작가이름 + 프로덕트 아이디
   const wantToCart = {
-      // name: data["productName"],
-      // price: data["price"],
-      // image: data["image"],
-      // artistName: data["painterEmail"],
-      productId: seq,
-  }
+    // name: data["productName"],
+    // price: data["price"],
+    // image: data["image"],
+    // artistName: data["painterEmail"],
+    productId: seq,
+  };
   // 기존 장바구니 리스트에 현재 작품이 있다면 error?
-  if(cartList.length == 0){
+  if (cartList.length == 0) {
     cartList.push(wantToCart);
     localStorage.setItem("cart", JSON.stringify(cartList));
-  }
-  else{
-    cartList.forEach(data =>{
-      if(data["productId"] == seq){
-        alert("존재")
-      } 
-      
-    })
+  } else {
+    cartList.forEach((data) => {
+      if (data["productId"] == seq) {
+        alert("존재");
+      }
+    });
     cartList.push(wantToCart);
     localStorage.setItem("cart", JSON.stringify(cartList));
   }
   // 기존 장바구니 리스트에 현재 작품까지 넣음.
-  
 
   // 로컬스토리지에 추가
-  
 }
-
 
 // addCartBtn.addEventListener("click", addCart);
 
-
 // 구매하기 +
-const buyBtn = document.querySelector(".BuyNow");
+// const buyBtn = document.querySelector(".BuyNow");
 
-function buyNow(){
-  const price = Number(document.querySelector("#work-price").textContent.replace("원", ""));
+// function buyNow() {
+//   const price = Number(
+//     document.querySelector("#work-price").textContent.replace("원", "")
+//   );
 
-  const buyList = {
-      productId: document.querySelector("#product-id").name,
-      price: price,
-  }
-  localStorage.setItem("buy", JSON.stringify(buyList));
-}
+//   const buyList = {
+//     productId: document.querySelector("#product-id").name,
+//     price: price,
+//   };
+//   localStorage.setItem("buy", JSON.stringify(buyList));
+// }
 
-buyBtn.addEventListener("click", buyNow);
+// buyBtn.addEventListener("click", buyNow);

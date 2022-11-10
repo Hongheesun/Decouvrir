@@ -12,11 +12,11 @@ img {
 }
 
 body {
-  background-color: #000;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  height: 200vh;
+  background-color: #b4cac6;
+  height: 300vh;
+  position: relative;
 }
 
 /* .all-work-type {

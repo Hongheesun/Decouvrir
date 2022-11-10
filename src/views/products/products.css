@@ -12,11 +12,11 @@ img {
 }
 
 body {
-  background-color: #000;
+  background-color: #b4cac6;
   /* display: flex;
   flex-direction: column; */
   height: 300vh;
-  /* position: relative; */
+  position: relative;
 }
 
 .all-work-type {
@@ -32,12 +32,33 @@ body {
   margin-bottom: 80px;
 }
 
+.work-type-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 800;
+}
+
+.work-type-header a {
+  text-decoration: none;
+  color: #82918e;
+  background-color: #fff;
+  border-radius: 10px;
+  /* width: 133px;
+  height: 25px; */
+  padding: 5px;
+  font-size: 13px;
+  text-align: center;
+  box-shadow: 1px 1px 1px #82918e;
+}
+
 .work-wrapper {
   margin-top: 20px;
   display: flex;
   /* justify-content: space-around; */
   /* flex-direction: column; */
   width: 900px;
+  flex-wrap: wrap;
+
   /* height: 300px; */
   /* position: relative;
   margin: 30px auto;

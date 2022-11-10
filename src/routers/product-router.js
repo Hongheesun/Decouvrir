@@ -1,5 +1,6 @@
 import { Router } from "express";
 import is from "@sindresorhus/is";
+import { loginRequired, painterOnly, myProduct } from '../middlewares';
 import { productService } from "../services";
 import { imageUpload } from "./image-router";
 
@@ -7,7 +8,7 @@ import { imageUpload } from "./image-router";
 const productRouter = Router();
 
 //상품 등록
-productRouter.post("/product", async (req, res, next) => {
+productRouter.post("/product", loginRequired ,painterOnly, async (req, res, next) => {
     try {
         if(is.emptyObject(req.body)) {
             throw new Error(
@@ -31,8 +32,15 @@ productRouter.get("/products", async (req, res) => {
     res.status(200).json(products);
 })
 
+//작가의 상품 가져오기
+productRouter.get("/products/:painter", async (req, res) => {
+    const painterEmail = req.query.painterEmail;
+    const products = await productService.getproductsPainter(painterEmail);
+    res.status(200).json(products);
+})
+
 //상품 정보 수정
-productRouter.patch('/:seq', async(req, res, next) => {
+productRouter.patch('/:seq', loginRequired ,painterOnly, myProduct ,async(req, res, next) => {
     try {
         const { seq } = req.params;
         const { productName, price, content, category, image, categoryId } = req.body;
@@ -54,7 +62,7 @@ productRouter.patch('/:seq', async(req, res, next) => {
 });
 
 //상품 삭제
-productRouter.delete('/:seq', async(req, res, next) => {
+productRouter.delete('/:seq', loginRequired ,painterOnly,myProduct,async(req, res, next) => {
     const { seq } = req.params;
     const deleteProduct = await productService.deleteProduct(seq);
 

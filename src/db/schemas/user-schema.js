@@ -1,11 +1,11 @@
 import mongoose, { Schema } from "mongoose";
-const autoIncrement = require('mongoose-auto-increment');
+const autoIncrement = require("mongoose-auto-increment");
 autoIncrement.initialize(mongoose.connection);
-
+//
 const UserSchema = new Schema(
   {
     userNumber: {
-      type:Number,
+      type: Number,
       default: 0,
     },
     email: {
@@ -25,22 +25,29 @@ const UserSchema = new Schema(
       required: false,
     },
     address: {
-      type: new Schema(
-        {
-          postalCode: String,
-          address1: String,
-          address2: String,
-        },
-        {
-          _id: false,
-        }
-      ),
+      type: String,
       required: false,
     },
     role: {
       type: String,
       required: false,
-      default: "basic-user",
+      // default: "basic-user",
+    },
+    // painter: {
+    //   type: new Schema(
+    //     {
+    //       painterName: String,
+    //       introduce: String,
+    //     }
+    //   )
+    // },
+    painterName: {
+      type: String,
+      required: false,
+    },
+    introduce: {
+      type: String,
+      required: false,
     },
   },
   {
@@ -50,10 +57,10 @@ const UserSchema = new Schema(
 );
 
 UserSchema.plugin(autoIncrement.plugin, {
-  model: 'UserModel',
-  field: 'userNumber',
+  model: "UserModel",
+  field: "userNumber",
   startAt: 0,
-  increment: 1
-})
+  increment: 1,
+});
 
 export { UserSchema };

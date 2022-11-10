@@ -1,5 +1,5 @@
 import * as Api from "/api.js";
-import { validateEmail } from "/useful-functions.js";
+import { validateEmail, goToMypage } from "/useful-functions.js";
 
 // 요소(element), input 혹은 상수
 const emailInput = document.querySelector("#emailInput");
@@ -8,6 +8,7 @@ const submitButton = document.querySelector("#submitButton");
 
 addAllElements();
 addAllEvents();
+goToMypage();
 
 // html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 async function addAllElements() {}
@@ -39,7 +40,7 @@ async function handleSubmit(e) {
     const data = { email, password };
 
     const result = await Api.post("/api/login", data);
-    const token = result.token;
+    const token = result.userToken;
 
     // 로그인 성공, 토큰을 세션 스토리지에 저장
     // 물론 다른 스토리지여도 됨

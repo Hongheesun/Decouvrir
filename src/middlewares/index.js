@@ -3,3 +3,6 @@
 
 export * from "./error-handler";
 export * from "./login-required";
+export * from "./adminOnly";
+export * from "./painterOnly";
+export * from "./myproduct";
