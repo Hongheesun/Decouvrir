@@ -1,81 +1,63 @@
-import * as Api from "../api";
+import * as Api from "/api.js";
 
-const postBtn = document.querySelector(".postButton");
-import { checkLogin, goToAddProductPage } from "/useful-functions.js";
+const postBtn = document.querySelector("#postButton");
+const productNameInput = document.querySelector("#name");
+const contentInput = document.querySelector("#content");
+const priceInput = document.querySelector("#price");
+const categoryInput = document.querySelector("#category");
+
+const photoFile = document.querySelector("#image");
+
+//console.log(formData);
 
 let painterEmail = "";
 let painterName = "";
 let categoryId = "";
 
-const productName = document.querySelector("#name").value;
-const content = document.querySelector("#content").value;
-const price = document.querySelector("#price").value;
-const image = document.querySelector("#image").value;
-const category = document.querySelector("#category").value;
-
 let userData;
+
 async function insertUserData() {
   userData = await Api.get("/api/user");
-  console.log(userData);
-  const userDate = userData;
-
-  painterEmail = userDate.email;
-  painterName = userDate.painterName;
+  painterEmail = userData.email;
+  painterName = userData.painterName;
 }
 
 insertUserData();
-checkLogin();
-console.log(userData.role);
-goToAddProductPage(userData.role);
 postBtn.addEventListener("click", addProduct);
 
-function addProduct(e) {
-  e.preventDefault(); // 기본 폼 동작 막기
-  console.log("click");
+///////
+async function addProduct() {
+  const productName = productNameInput.value;
+  const content = contentInput.value;
+  const price = priceInput.value;
+  const category = categoryInput.value;
 
-  // getUserData();
+  const formData = new FormData();
+  formData.append("image", photoFile.files[0]); // 파일 첨부
+
+  // let result = "";
+  let image = "";
+  fetch(`/api/images/upload`, {
+    method: "POST",
+    body: JSON.stringify(formData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      alert(data.imagePath);
+      console.log(data.imagePath);
+    });
 
   if (category === "abstract") {
-    categoryId = "6368f390b4a8016623514ea2";
+    categoryId = "636ce421852cc32cf0f46591";
   } else if (category === "landscape") {
-    categoryId = "6368f39db4a8016623514ea6";
+    categoryId = "636ce42f852cc32cf0f46595";
   } else if (category === "illustration") {
-    categoryId = "6368f3abb4a8016623514eae";
+    categoryId = "636ce44d852cc32cf0f4659d";
   } else if (category === "asian") {
-    categoryId = "6368f3b0b4a8016623514eb2";
+    categoryId = "636ce439852cc32cf0f46599";
   }
-  //const categoryId = document.querySelector(".categoryId").value;
 
-  // let productData = {
-  //   method: "POST",
-  //   body: JSON.stringify({
-  //     painterEmail,
-  //     painterName,
-  //     productName,
-  //     price,
-  //     content,
-  //     category,
-  //     categoryId,
-  //     image,
-  //   }),
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-  //   },
-  // };
-
-  // fetch(`/api/product`, productData)
-  //   .then((res) => {
-  //     // javascript로 데이터를 받아 json 형태로 return 시키고
-  //     return res.json();
-  //   })
-  //   .then((json) => {
-  //     // 다시 then으로 받아 json으로 출력하면 결과값이 나온다
-  //     console.log(json);
-  //   })
-  //   .catch((error) => console.log("fetch 에러!"));
-
-  const data = JSON.stringify({
+  const data = {
     painterEmail,
     painterName,
     productName,
@@ -84,7 +66,13 @@ function addProduct(e) {
     category,
     categoryId,
     image,
-  });
+  };
 
-  Api.post(`/api/product`, data);
+  //try {
+  console.log(data);
+  await Api.post(`/api/product`, data);
+  // }  catch (err) {
+  //   console.error(err.stack);
+  //   alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  // }
 }

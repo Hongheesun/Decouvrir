@@ -158,6 +158,8 @@ userRouter.patch(
     }
   }
 );
+
+// 유저 delete 변경
 userRouter.delete(
   "/user/:userNumber",
   loginRequired,

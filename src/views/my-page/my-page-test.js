@@ -93,6 +93,8 @@ async function updateUserData() {
   const data = { currentPassword };
 
   // 초기값과 다를 경우 api 요청에 사용할 data 객체에 넣어줌
+  console.log(userData.email);
+
   console.log(userData.fullName);
 
   if (fullName !== userData.fullName) {
@@ -144,12 +146,12 @@ async function updateUserData() {
   // }
 }
 
-function userWithdraw(e) {
-  e.preventDefault();
+function userWithdraw() {
+  // const { password } = userData;
   const { userNumber } = userData;
-
+  // console.log(userNumber);
   try {
-    Api.del("/api/users", userNumber);
+    Api.del("/api/user", userNumber);
     sessionStorage.removeItem("token");
 
     // 삭제 성공

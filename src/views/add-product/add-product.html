@@ -1,68 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-데모</title>
-
-    <link rel="stylesheet" href="../register/register.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>work-page</title>
+    <!-- <link rel="stylesheet" href="./css/style.css"> -->
+    <link rel="stylesheet" href="./products.css">
     <link rel="stylesheet" href="../include/header.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
-
-    <script src="add-product.js" type="module" defer></script>
 </head>
 
 <body>
-
     <header data-include="../include/header.html"></header>
-
-    <!-- 회원가입 폼(Form) -->
-    <div class="register-user-form-container">
-        <form class="register-user-form-box box" id="registerUserForm">
-            <p class="title  registerTitle" id="registerTitle">상품 등록</p>
-            <div class="field">
-                <label class="label" for="name">상품명</label>
-                <div class="control">
-                    <input class="input" id="name" type="text" autocomplete="on" />
-                </div>
+    <section class="all-work-type">
+        <section class="work-type">
+            <div class="work-type-header">
+                <span class="sub-title">추상화</span>
+                <a href="/abstract">작품 더 보러가기</a>
             </div>
-
-            <div class="field">
-                <label class="label" for="image">이미지</label>
-                <input id="image" type="file" autocomplete="on" />
+            <ul class="work-wrapper" id="abstract-work-wrapper">
+            </ul>
+        </section>
+        <section class="work-type">
+            <div class="work-type-header">
+                <span class="sub-title">동양화</span>
+                <a href="/asian">작품 더 보러가기</a>
             </div>
-
-            <div class="field">
-                <label class="label" for="category">카테고리</label>
-                <div class="control">
-                    <input class="input" id="category" type="text" autocomplete="on" />
-                </div>
+            <ul class="work-wrapper" id="asian-work-wrapper">
+            </ul>
+        </section>
+        <section class="work-type">
+            <div class="work-type-header">
+                <span class="sub-title">풍경화</span>
+                <a href="/landscape">작품 더 보러가기</a>
             </div>
-
-            <div class="field">
-                <label class="label" for="content">상품 소개</label>
-                <div class="control">
-                    <input class="input" id="content" type="text" autocomplete="off" />
-                </div>
+            <ul class="work-wrapper" id="landscape-work-wrapper">
+            </ul>
+        </section>
+        <section class="work-type">
+            <div class="work-type-header">
+                <span class="sub-title">일러스트</span>
+                <a href="/illustration">작품 더 보러가기</a>
             </div>
+            <ul class="work-wrapper" id="illustration-work-wrapper">
+            </ul>
+        </section>
 
-            <div class="field mb-5">
-                <label class="label" for="passwordConfirmInput">상품 가격</label>
-                <div class="control">
-                    <input class="input" id="passwordConfirmInput" type="password" placeholder="********"
-                        autocomplete="off" />
-                </div>
-            </div>
-            <button class="button is-primary is-fullwidth" id="postButton">
-                상품 등록
-            </button>
-        </form>
-    </div>
-
+    </section>
     <footer data-include="../include/footer.html"></footer>
+
+    <!-- <script src="./slide.js"></script> -->
+    <script src="./products.js"></script>
+
+    <script src="../include/include.js"></script>
+    <script src="https://kit.fontawesome.com/58adb12a8e.js" crossorigin="anonymous"></script>
 </body>
-<script src="../include/include.js" defer></script>
-<script src="https://kit.fontawesome.com/58adb12a8e.js" crossorigin="anonymous"></script>
 
 </html>
