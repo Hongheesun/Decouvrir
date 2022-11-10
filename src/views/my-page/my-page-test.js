@@ -4,21 +4,26 @@ import { checkLogin } from "/useful-functions.js";
 checkLogin();
 
 // 요소(element), input 혹은 상수
-const securityTitle = document.querySelector("#securityTitle");
+// const securityTitle = document.querySelector("#securityTitle");
 const fullNameInput = document.querySelector("#fullNameInput");
 const passwordInput = document.querySelector("#passwordInput");
 const addressInput = document.querySelector("#addressInput");
-
+const painterNameInput = document.querySelector("#painterNameInput");
+const introduceInput = document.querySelector("#introduceInput");
+const painterInputs = document.querySelector("#painterInputs");
 const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
 const saveButton = document.querySelector("#saveButton");
+const withdrawButton = document.querySelector("#withdrawButton");
+const logoutButton = document.querySelector(".logoutButton");
 
 const modal = document.querySelector("#modal");
 const saveCompleteButton = document.querySelector("#saveCompleteButton");
 const currentPasswordInput = document.querySelector("#currentPasswordInput");
-//saveButton.addEventListener("click", updateUserData);
 saveButton.addEventListener("click", openModal);
 saveCompleteButton.addEventListener("click", updateUserData);
+withdrawButton.addEventListener("click", userWithdraw);
+logoutButton.addEventListener("click", userLogout);
 
 let userData;
 async function insertUserData() {
@@ -26,28 +31,32 @@ async function insertUserData() {
   userData = await Api.get("/api/user");
   console.log(userData);
 
-  // const securityTitle = document.querySelector("#securityTitle");
+  // const userData = userData;
 
-  const userDate = userData;
+  // const securityTitle = document.querySelector("#securityTitle");
+  if (userData.role === "painter-user") {
+    painterInputs.style.display = "block";
+  } else if (userData.role === "basic-user") {
+    painterInputs.style.display = "none";
+  }
 
   // 서버에서 온 비밀번호는 해쉬 문자열인데, 이를 빈 문자열로 바꿈
   // 나중에 사용자가 비밀번호 변경을 위해 입력했는지 확인하기 위함임.
   userData.password = "";
 
-  securityTitle.innerText = `회원정보 관리 (${userDate.email})`;
+  // securityTitle.innerText = `회원정보 관리 (${userData.email})`;
 
-  fullNameInput.value = userDate.fullName;
-  passwordInput.value = userDate.password;
-  addressInput.value = userDate.address;
-  phoneNumberInput.value = userDate.phoneNumber;
-
-  // if (phoneNumber) {
-  //   phoneNumberInput.value = phoneNumber;
-  // }
+  fullNameInput.value = userData.fullName;
+  passwordInput.value = userData.password;
+  addressInput.value = userData.address;
+  phoneNumberInput.value = userData.phoneNumber;
+  painterNameInput.value = userData.painterName;
+  introduceInput.value = userData.introduce;
 
   // 크롬 자동완성 삭제함.
   passwordInput.value = "";
 }
+
 insertUserData();
 
 //// 유저 정보 수정하기 ////
@@ -57,10 +66,12 @@ async function updateUserData() {
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
   // const postalCode = postalCodeInput.value;
-  // const address1 = address1Input.value;
+  const address = addressInput.value;
   // const address2 = address2Input.value;
   const phoneNumber = phoneNumberInput.value;
   const currentPassword = currentPasswordInput.value;
+  const painterName = painterNameInput.value;
+  const introduce = introduceInput.value;
 
   const isPasswordLong = password.length >= 4;
   const isPasswordSame = password === passwordConfirm;
@@ -94,7 +105,19 @@ async function updateUserData() {
     data.password = password;
   }
 
-  if (phoneNumber && phoneNumber !== userData.phoneNumber) {
+  if (address !== userData.address) {
+    data.address = address;
+  }
+
+  if (painterName !== userData.painterName) {
+    data.painterName = password;
+  }
+
+  if (introduce !== userData.Introduce) {
+    data.introduce = password;
+  }
+
+  if (phoneNumber !== userData.phoneNumber) {
     data.phoneNumber = phoneNumber;
   }
 
@@ -106,17 +129,48 @@ async function updateUserData() {
     return alert("업데이트된 정보가 없습니다");
   }
 
-  try {
-    const { _id } = userData;
-    // db에 수정된 정보 저장
-    await Api.patch("/api/users", _id, data);
+  //try {
+  const { userNumber } = userData;
+  // db에 수정된 정보 저장
+  console.log(userNumber);
+  await Api.patch("/api/users", userNumber, data);
 
-    alert("회원정보가 안전하게 저장되었습니다.");
-    // disableForm();
-    // closeModal();
-    console.log(data);
+  alert("회원정보가 안전하게 저장되었습니다.");
+  /// disableForm();
+  console.log(data);
+  //}
+  //  catch (err) {
+  //   alert(`회원정보 저장 과정에서 오류가 발생하였습니다: ${err}`);
+  // }
+}
+
+function userWithdraw(e) {
+  e.preventDefault();
+  const { userNumber } = userData;
+
+  try {
+    Api.del("/api/users", userNumber);
+    sessionStorage.removeItem("token");
+
+    // 삭제 성공
+    alert("회원 정보가 안전하게 삭제되었습니다.");
+
+    window.location.href = "/";
   } catch (err) {
-    alert(`회원정보 저장 과정에서 오류가 발생하였습니다: ${err}`);
+    alert(`회원정보 삭제 과정에서 오류가 발생하였습니다: ${err}`);
+  }
+}
+
+function userLogout() {
+  const token = sessionStorage.getItem("token");
+  if (token) {
+    console.log("click!");
+    sessionStorage.removeItem("token");
+    alert("로그아웃 성공!");
+    window.location.href("/");
+  } else {
+    alert("로그인 먼저 해주세요!");
+    window.location.href("/login");
   }
 }
 

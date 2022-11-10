@@ -35,27 +35,3 @@ renderProducts(abstract, "#abstract-work-wrapper");
 renderProducts(asian, "#asian-work-wrapper");
 renderProducts(landscape, "#landscape-work-wrapper");
 renderProducts(illustration, "#illustration-work-wrapper");
-
-// 카테고리별로 section 추가
-// let categoryList = document.querySelector(".all-work-type");
-// async function addCategoryList() {
-//     const categories = await Api.get("/api/category");
-//     let categoryContent = "";
-//     for (let category of categories) {
-//         categoryContent += `
-//             <section class="work-type">
-//                 <span class="sub-title" id="${category.categoryName}">${category.categoryName}</span>
-//                 <ul class="work-wrapper" id="category-${category.categoryName}">
-//                 </ul>
-//             </section>`;
-//         categoryList.innerHTML = categoryContent;
-//         let categoryBtn = document.querySelector(`#${category.categoryName}`);   
-//         categoryBtn.addEventListener("click", location(`products/list?category=${category.categoryName}`));
-
-//         let categoryWorkWrapper = document.querySelector(`#category-${category.categoryName}`);
-//         renderProducts(categoryWorkWrapper, category.categoryName);
-//         console.log(categoryWorkWrapper);
-//     };
-    
-// }
-// addCategoryList();

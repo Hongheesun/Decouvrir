@@ -1,16 +1,41 @@
+body {
+  height: 160vh;
+  position: relative;
+  background-color: #b4cac6;
+}
+
 .register-user-form-container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 130vh;
 }
+#registerUserForm {
+  width: 400px;
+  margin-top: 30px;
+  padding: 2.25rem;
+  /* background-color: #000; */
+}
 
-.register-user-form-box {
+/* .register-user-form-box {
   width: 30rem;
+} */
+
+.box {
+  padding: 2.25rem;
+}
+
+.register-user-form-box label {
+  color: #acacac;
+  font-weight: 500;
+  font-size: 13px;
 }
 
 .register-user-form-box .title {
   text-align: center;
+  color: #99bab5e0;
+  font-weight: 900;
+  font-size: 25px;
 }
 
 .register-user-form-box .button {
@@ -18,11 +43,32 @@
 }
 
 .register-user-form-box .input:focus {
-  border-color: #00d1b2;
-  box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
+  border-color: #abd0cb;
+  box-shadow: 0 0 0 0.125em #00d1b240;
 }
 
-.field:nth-of-type(6) {
+.field span {
+  color: #acacac;
+}
+
+.field-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.field-header a {
+  width: 70px;
+  height: 22px;
+  text-align: center;
+  background-color: #99bab5e0;
+  border-radius: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.field:nth-of-type(7) {
   margin: 20px 0;
   font-weight: 800;
   display: flex;
@@ -32,6 +78,14 @@
 .painter-user-form-container {
   display: none;
   margin-bottom: 30px;
+}
+
+#submitButton {
+  background-color: #99bab5e0;
+}
+
+.field .input {
+  font-size: 15px;
 }
 
 /* 작가 토글 css */
@@ -66,5 +120,5 @@
 }
 
 .toggle-switch input[id="togle-swith"]:checked + label {
-  background: #3497db;
+  background: #99bab5e0;
 }

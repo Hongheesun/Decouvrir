@@ -1,7 +1,6 @@
 import { model } from "mongoose";
 import { UserSchema } from "../schemas/user-schema";
 
-//
 const User = model("users", UserSchema);
 
 export class UserModel {
@@ -25,12 +24,21 @@ export class UserModel {
     return users;
   }
 
+  async findPainters() {
+    const painters = await User.find({ role: "painter-user" });
+    return painters;
+  }
+
   async update({ userNumber, userId, update }) {
     const filter = { userNumber, email: userId };
     const option = { returnOriginal: false };
 
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
+  }
+
+  async delete(userNumber) {
+    return await User.findOneAndDelete({ userNumber });
   }
 }
 

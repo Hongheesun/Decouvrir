@@ -1,5 +1,10 @@
+//import * as Api from "/api.js";
+
 async function getProducts() {
   let url = `/api/products`;
+  // const res = await Api.get(url);
+  // console.log(res);
+  // return res.json();
   try {
     let res = await fetch(url);
     return await res.json();
@@ -60,17 +65,26 @@ async function renderProducts() {
 renderProducts();
 
 function deleteProduct(seq) {
+  console.log(seq);
+
+  // Api.del(`/api`, seq);
   fetch(`/api/${seq}`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
   })
     // .then((res) => res.json())
     .then((data) => {
       console.log("delete 성공!");
       //   return data;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+    });
 
-  window.location.href = "/abstract";
+  window.location.reload();
 }
 
 /////////////////  updateProduct  /////////////////

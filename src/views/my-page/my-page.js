@@ -52,7 +52,7 @@ async function updateUserData() {
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
   // const postalCode = postalCodeInput.value;
-  // const address1 = address1Input.value;
+  const address = addressInput.value;
   // const address2 = address2Input.value;
   const phoneNumber = phoneNumberInput.value;
   // const currentPassword = currentPasswordInput.value;

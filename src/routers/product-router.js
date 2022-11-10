@@ -1,18 +1,23 @@
 import { Router } from "express";
 import is from "@sindresorhus/is";
-import { loginRequired } from '../middlewares';
+import { loginRequired, painterOnly, myProduct } from '../middlewares';
 import { productService } from "../services";
+import { imageUpload } from "./image-router";
+
 
 const productRouter = Router();
 
 //상품 등록
-productRouter.post("/product", loginRequired ,async (req, res, next) => {
+productRouter.post("/product", loginRequired ,painterOnly, async (req, res, next) => {
     try {
         if(is.emptyObject(req.body)) {
             throw new Error(
                 'create product error'
             );
         } 
+        // console.log(req.file.location)
+        // req.body.image = req.file.location;
+        // console.log(req.body.image)
         const newProduct = await productService.addProduct(req.body);
         res.status(201).json(newProduct);
     } catch (error) {
@@ -35,10 +40,10 @@ productRouter.get("/products/:painter", async (req, res) => {
 })
 
 //상품 정보 수정
-productRouter.patch('/:seq', loginRequired ,async(req, res, next) => {
+productRouter.patch('/:seq', loginRequired ,painterOnly, myProduct ,async(req, res, next) => {
     try {
         const { seq } = req.params;
-        const { productName, price, content, category, image } = req.body;
+        const { productName, price, content, category, image, categoryId } = req.body;
         
         const toUpdate = {
             ...(productName && { productName }),
@@ -57,7 +62,7 @@ productRouter.patch('/:seq', loginRequired ,async(req, res, next) => {
 });
 
 //상품 삭제
-productRouter.delete('/:seq', loginRequired ,async(req, res, next) => {
+productRouter.delete('/:seq', loginRequired ,painterOnly,myProduct,async(req, res, next) => {
     const { seq } = req.params;
     const deleteProduct = await productService.deleteProduct(seq);
 
