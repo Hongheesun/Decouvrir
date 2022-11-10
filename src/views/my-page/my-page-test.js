@@ -4,7 +4,7 @@ import { checkLogin } from "/useful-functions.js";
 checkLogin();
 
 // 요소(element), input 혹은 상수
-const securityTitle = document.querySelector("#securityTitle");
+// const securityTitle = document.querySelector("#securityTitle");
 const fullNameInput = document.querySelector("#fullNameInput");
 const passwordInput = document.querySelector("#passwordInput");
 const addressInput = document.querySelector("#addressInput");
@@ -15,14 +15,15 @@ const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
 const phoneNumberInput = document.querySelector("#phoneNumberInput");
 const saveButton = document.querySelector("#saveButton");
 const withdrawButton = document.querySelector("#withdrawButton");
+const logoutButton = document.querySelector(".logoutButton");
 
 const modal = document.querySelector("#modal");
 const saveCompleteButton = document.querySelector("#saveCompleteButton");
 const currentPasswordInput = document.querySelector("#currentPasswordInput");
-//saveButton.addEventListener("click", updateUserData);
 saveButton.addEventListener("click", openModal);
 saveCompleteButton.addEventListener("click", updateUserData);
 withdrawButton.addEventListener("click", userWithdraw);
+logoutButton.addEventListener("click", userLogout);
 
 let userData;
 async function insertUserData() {
@@ -43,7 +44,7 @@ async function insertUserData() {
   // 나중에 사용자가 비밀번호 변경을 위해 입력했는지 확인하기 위함임.
   userData.password = "";
 
-  securityTitle.innerText = `회원정보 관리 (${userData.email})`;
+  // securityTitle.innerText = `회원정보 관리 (${userData.email})`;
 
   fullNameInput.value = userData.fullName;
   passwordInput.value = userData.password;
@@ -55,6 +56,7 @@ async function insertUserData() {
   // 크롬 자동완성 삭제함.
   passwordInput.value = "";
 }
+
 insertUserData();
 
 //// 유저 정보 수정하기 ////
@@ -127,20 +129,50 @@ async function updateUserData() {
     return alert("업데이트된 정보가 없습니다");
   }
 
-  try {
-    const { userNumber } = userData;
-    // db에 수정된 정보 저장
-    await Api.patch("/api/users", userNumber, data);
+  //try {
+  const { userNumber } = userData;
+  // db에 수정된 정보 저장
+  console.log(userNumber);
+  await Api.patch("/api/users", userNumber, data);
 
-    alert("회원정보가 안전하게 저장되었습니다.");
-    /// disableForm();
-    console.log(data);
+  alert("회원정보가 안전하게 저장되었습니다.");
+  /// disableForm();
+  console.log(data);
+  //}
+  //  catch (err) {
+  //   alert(`회원정보 저장 과정에서 오류가 발생하였습니다: ${err}`);
+  // }
+}
+
+function userWithdraw(e) {
+  e.preventDefault();
+  const { userNumber } = userData;
+
+  try {
+    Api.del("/api/users", userNumber);
+    sessionStorage.removeItem("token");
+
+    // 삭제 성공
+    alert("회원 정보가 안전하게 삭제되었습니다.");
+
+    window.location.href = "/";
   } catch (err) {
-    alert(`회원정보 저장 과정에서 오류가 발생하였습니다: ${err}`);
+    alert(`회원정보 삭제 과정에서 오류가 발생하였습니다: ${err}`);
   }
 }
 
-function userWithdraw() {}
+function userLogout() {
+  const token = sessionStorage.getItem("token");
+  if (token) {
+    console.log("click!");
+    sessionStorage.removeItem("token");
+    alert("로그아웃 성공!");
+    window.location.href("/");
+  } else {
+    alert("로그인 먼저 해주세요!");
+    window.location.href("/login");
+  }
+}
 
 // Modal 창 열기
 function openModal(e) {

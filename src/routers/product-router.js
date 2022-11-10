@@ -1,6 +1,6 @@
 import { Router } from "express";
 import is from "@sindresorhus/is";
-import { loginRequired, painterOnly } from '../middlewares';
+import { loginRequired, painterOnly, myProduct } from '../middlewares';
 import { productService } from "../services";
 
 const productRouter = Router();
@@ -35,10 +35,10 @@ productRouter.get("/products/:painter", async (req, res) => {
 })
 
 //상품 정보 수정
-productRouter.patch('/:seq', loginRequired ,painterOnly,async(req, res, next) => {
+productRouter.patch('/:seq', loginRequired ,painterOnly, myProduct ,async(req, res, next) => {
     try {
         const { seq } = req.params;
-        const { productName, price, content, category, image } = req.body;
+        const { productName, price, content, category, image, categoryId } = req.body;
         
         const toUpdate = {
             ...(productName && { productName }),
@@ -57,7 +57,7 @@ productRouter.patch('/:seq', loginRequired ,painterOnly,async(req, res, next) =>
 });
 
 //상품 삭제
-productRouter.delete('/:seq', loginRequired ,painterOnly,async(req, res, next) => {
+productRouter.delete('/:seq', loginRequired ,painterOnly,myProduct,async(req, res, next) => {
     const { seq } = req.params;
     const deleteProduct = await productService.deleteProduct(seq);
 

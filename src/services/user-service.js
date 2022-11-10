@@ -40,9 +40,9 @@ class UserService {
       password: hashedPassword,
       phoneNumber,
       address,
+      role,
       painterName,
       introduce,
-      role,
     };
 
     // db에 저장
@@ -100,6 +100,11 @@ class UserService {
   async getOneUser(userId) {
     const user = await this.userModel.findOneUser(userId);
     return user;
+  }
+
+  async getPainters() {
+    const painters = await this.userModel.findPainters();
+    return painters;
   }
 
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능

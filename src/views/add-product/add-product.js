@@ -1,19 +1,18 @@
 // export default axiosPost;
 import * as Api from "../api";
 
-const postBtn = document.querySelector(".post-button");
-import { checkLogin } from "/useful-functions.js";
-checkLogin();
+const postBtn = document.querySelector(".postButton");
+import { checkLogin, goToAddProductPage } from "/useful-functions.js";
 
 let painterEmail = "";
 let painterName = "";
 let categoryId = "";
 
-const productName = document.querySelector(".name").value;
-const content = document.querySelector(".content").value;
-const price = document.querySelector(".price").value;
-const image = document.querySelector(".image").value;
-const category = document.querySelector(".category").value;
+const productName = document.querySelector("#name").value;
+const content = document.querySelector("#content").value;
+const price = document.querySelector("#price").value;
+const image = document.querySelector("#image").value;
+const category = document.querySelector("#category").value;
 
 let userData;
 async function insertUserData() {
@@ -24,7 +23,11 @@ async function insertUserData() {
   painterEmail = userDate.email;
   painterName = userDate.painterName;
 }
+
 insertUserData();
+checkLogin();
+console.log(userData.role);
+goToAddProductPage(userData.role);
 postBtn.addEventListener("click", addProduct);
 
 function addProduct(e) {
@@ -83,4 +86,6 @@ function addProduct(e) {
     categoryId,
     image,
   });
+
+  Api.post(`/api/product`, data);
 }

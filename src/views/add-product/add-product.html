@@ -1,32 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-데모</title>
 
+    <!-- bulma css 관련 -->
+    <link rel="stylesheet" href="../register/register.css" />
+    <link rel="stylesheet" href="../include/header.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+
+    <script src="add-product.js" type="module" defer></script>
 </head>
 
 <body>
-    <form id="form">
-        <!-- 여기서 email input 은 아직 토큰을 이용하지 못해서 임의로 넣었습니다 -->
-        <!-- <input class=" is-medium search-input email" type="text" placeholder="유제 이메일을 입력하세요."> -->
-        <input class="is-medium search-input name" type="text" placeholder="상품명을 입력하세요.">
-        <input class="is-medium search-input image" type="file">
-        <input class="is-medium search-input category" type="text" placeholder="상품 카테고리.">
 
-        <input class="is-medium search-input content" type="text" placeholder="상품 소개.">
-        <input class="is-medium search-input price" type="text" placeholder="상품 희망 가격.">
+    <header data-include="../include/header.html"></header>
 
-        <button class="is-medium search-button post-button" type="submit">
-            <span class="material-icons">
-                작품 등록
-            </span>
-        </button>
-    </form>
-    <script src="add-product.js"></script>
+    <!-- 회원가입 폼(Form) -->
+    <div class="register-user-form-container">
+        <form class="register-user-form-box box" id="registerUserForm">
+            <p class="title  registerTitle" id="registerTitle">상품 등록</p>
+            <div class="field">
+                <label class="label" for="name">상품명</label>
+                <div class="control">
+                    <input class="input" id="name" type="text" autocomplete="on" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="image">이미지</label>
+                <input id="image" type="file" autocomplete="on" />
+            </div>
+
+            <div class="field">
+                <label class="label" for="category">카테고리</label>
+                <div class="control">
+                    <input class="input" id="category" type="text" autocomplete="on" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="content">상품 소개</label>
+                <div class="control">
+                    <input class="input" id="content" type="text" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="field mb-5">
+                <label class="label" for="passwordConfirmInput">상품 가격</label>
+                <div class="control">
+                    <input class="input" id="passwordConfirmInput" type="password" placeholder="********"
+                        autocomplete="off" />
+                </div>
+            </div>
+            <button class="button is-primary is-fullwidth" id="postButton">
+                상품 등록
+            </button>
+        </form>
+    </div>
+
+    <footer data-include="../include/footer.html"></footer>
 </body>
+<script src="../include/include.js" defer></script>
+<script src="https://kit.fontawesome.com/58adb12a8e.js" crossorigin="anonymous"></script>
 
 </html>

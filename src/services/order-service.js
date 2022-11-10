@@ -7,7 +7,7 @@ class OrderService {
     }
 
         async addOrder(orderInfo) {
-        const { userId, products, address, phoneNumber } = orderInfo;
+        const { userEmail, products, recipientName, recipientPhoneNumber, recipientAddress } = orderInfo;
         // 날짜로 주문번호 생성
         const newDate = new Date();
         function formatDate(newDate){
@@ -21,16 +21,16 @@ class OrderService {
           return acc.price + curr.price;
       }); 
         const deliveryStatus = "상품준비중";
-        const email = userId; // user 스키마에 userId 필드 auto-increment로 수정하기
-        const newOrderInfo = { email, orderId, products, totalPrice, address, phoneNumber, deliveryStatus};
+        const email = userEmail; // user 스키마에 userId 필드 auto-increment로 수정하기
+        const newOrderInfo = { email, orderId, products, totalPrice, recipientName, recipientPhoneNumber, recipientAddress, deliveryStatus};
         const order = orderModel.create(newOrderInfo);
         return order;
       }
 
 
     async setOrder(orderDate, orderNumber, orderInfo){
-      const { userId, address, phoneNumber } = orderInfo;
-      const update = {address, phoneNumber};
+      const { userId, recipientName, recipientPhoneNumber, recipientAddress } = orderInfo;
+      const update = { recipientName, recipientPhoneNumber, recipientAddress };
       return orderModel.update(userId, orderDate, orderNumber, update);
     }
 

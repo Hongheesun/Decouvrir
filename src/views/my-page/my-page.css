@@ -1,27 +1,3 @@
-body {
-  background-color: black;
-  height: 100vh;
-  position: relative;
-}
-
-#painterInputs {
-  display: none;
-}
-
-/* 회원가입 정보 박스 */
-.form-container {
-  display: flex;
-  justify-content: center;
-}
-
-.form-box {
-  width: 40rem;
-}
-
-.form-box .control {
-  display: flex;
-}
-
 /* 토글 스위치 */
 .switch {
   position: relative;
@@ -63,77 +39,29 @@ body {
   border-radius: 50%;
 }
 
-input:checked + .slider {
-  background-color: #2196f3;
+#saveButton {
+  background-color: #b4cac6;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+#withdrawButton {
+  /* background-color: #fff;
+  border: 3px solid #c692a3; */
+  background-color: #bfa0ab;
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(32px);
-  -ms-transform: translateX(32px);
-  transform: translateX(32px);
-}
+/* .field:nth-child(1) {
+  display: flex;
+} */
 
-/* 소셜 로그인인 경우 */
-input.disabled + .slider {
-  background-color: #666;
-}
-
-/* 소셜 로그인 관련 문구 */
-input.disabled ~ .info-text {
-  position: absolute;
-  left: 5rem;
-  top: -1rem;
-  min-width: 12rem;
-  /*border: 1px #aaaaaa solid;*/
+.logoutButton {
+  width: 73px;
+  height: 25px;
+  background-color: #99bab5e0;
   border-radius: 10px;
-  background-color: #333;
-  padding: 12px;
   color: #fff;
-  font-size: 0.8rem;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.1s linear 0.2s;
-}
-
-input.disabled + .slider:hover + .info-text {
-  opacity: 1 !important;
-}
-
-/* 폼 관련 */
-.label-address {
-  text-align: left;
-  margin-bottom: 0.5rem;
-}
-
-.switch-address {
-  width: 66px;
-}
-
-/* 숫자 input의 위 아래 화살표 제거 */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.button-submit {
-  margin-top: 2rem;
-}
-
-/* 모달(Modal) 창 관련 */
-.modal-content button.delete {
-  position: absolute;
-  right: 3px;
-  top: 3px;
-  background: transparent;
-}
-
-.modal-content button.delete::before,
-.modal-content button.delete::after {
-  background-color: black;
+  border-radius: 10px;
+  border: none;
+  padding: 3px;
+  font-weight: 800;
+  cursor: pointer;
 }
