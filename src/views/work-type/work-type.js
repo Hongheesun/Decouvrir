@@ -1,55 +1,36 @@
-import * as Api from "/api.js";
+import * as Api from "../../api.js";
+import { location, getUrlParams } from "../../useful-functions.js";
+
+let categoryName = document.querySelector(".sub-title");
+let categoryItemList = document.querySelector(".work-wrapper");
 
 async function renderProducts() {
-    let products = await Api.get("/api/products");;
-    console.log(products);
-    let html = "";
+    const { category } = getUrlParams();
+    categoryName.innerHTML = category;
+
+    let products = await Api.get("/api/products");
+    let productsContent = "";
     
     products.forEach((data) => {
-        if (data["category"] === "abstract") {
-            let htmlSegment = `   <li class="work">
-        <button class="delete-button" onClick="deleteProduct(${data["seq"]})" >삭제하기</button>
-        
-        <button class="open-toggle-button" onClick="showToggle()">수정하기</button> 
-        <button class="open-toggle-button" onClick="addCart(${data["seq"]})">장바구니</button> 
-        <button class="open-toggle-button" onClick="buyNow(${data["seq"]})">구매하기</button> 
-        <form class="toggle-page">
-          <button class="closeBtn" onClick="closeToggle()">X</button>
-          <input class="is-medium search-input name" type="text" placeholder="상품명을 입력하세요.">
-          <input class="is-medium search-input image" type="file">
-          <input class="is-medium search-input category" type="text" placeholder="상품 카테고리.">
-  
-          <input class="is-medium search-input content" type="text" placeholder="상품 소개.">
-          <input class="is-medium search-input price" type="text" placeholder="상품 희망 가격.">
-  
-          <button class="is-medium search-button post-button" type="submit" onclick='updateProduct(${data["seq"]})'>
-              <span class="material-icons">
-                  상품 수정
-              </span>
-          </button>
-      </form>
-  
-        <div class="product-image">
-            </div>
-            <span class="work-info">
-                <span class="painter">
-                </span>
-                <span> | </span>
-                <span class="product-name" id="${data._id}">${data.productName}</span>
-            </span>
-            <span class="price">${data.price}
-            </span>
-        </li>`;
-
-            html += htmlSegment;
-            const imageBtn = document.querySelector(`#${data._id}`);
-            imageBtn.addEventListener("click", window.location.href = `/products/?name=${productName}`);
+        if (data.category === category) {
+            console.log(data.category);
+            productsContent += `
+                <li class="work">
+                    <div class="product-image">
+                        <a href="/products/detail?id=${data._id}"><img src="" id= "${data._id}" alt="상품사진"></a>
+                    </div>
+                    <span class="work-info">
+                        <span class="painter">${data.painterEmail}</span>
+                        <span> | </span>
+                        <span class="product-name">${data.productName}</span>
+                    </span>
+                    <span class="price">${data.price}</span>
+                </li>`; 
+            categoryItemList.innerHTML = productsContent;
+            // const imageBtn = document.querySelector(`#${data._id}`);
+            // imageBtn.addEventListener("click", location(`/products/detail?id=${data._id}`));
         }
     });
-
-    let container = document.querySelector(".work-wrapper");
-    container.innerHTML = html;
-
     
 }
 

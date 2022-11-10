@@ -1,29 +1,22 @@
-import * as Api from "/api.js";
-
-const productUrl = window.location.href.split("/");
-const productUrlName = productUrl[productUrl.length - 1];
+import * as Api from "../../api.js";
+import { getUrlParams } from "../../useful-functions.js";
 
 // 작품 data 가져오기
 async function getProductDetail() {
+    const { productId } = getUrlParams();
     const products = await Api.get("/api/products");;
-    const users = await Api.get("/api/userlist");
-    let painterEmail;
-    
+    console.log(productId);
+    console.log(products);
     products.forEach(productData => {
-        if(productData.productName === productUrlName){
+        if(productData._id === productId){
+            console.log(productData);
             document.querySelector("#product-id").name = productData._id;
             document.querySelector("#work-img").src= productData.image;
             document.querySelector("#work-type").innerHTML= productData.category;
-            painterEmail = productData.painterEmail;
-            document.querySelector("#work-name").innerHTML= `${productData.productName} | `;
+            document.querySelector("#work-name").innerHTML= `${productData.productName} | ${productData.painterEmail}`;
             document.querySelector("#work-price").innerHTML= productData.price + ' 원';
             document.querySelector("#work-explain").innerHTML= productData.content;
-        }
-    })
-
-    users.forEach(user => {
-        if(user.email === painterEmail){
-            document.querySelector("#work-name").innerHTML += user.painter.painterName;
+            document.querySelector("#painter-link").href= `/painter/?name=${productData.painterEmail}`;
         }
     })
 }
@@ -31,14 +24,15 @@ getProductDetail();
 
 // 장바구니 추가하기
 const addCartBtn = document.querySelector(".addCart");
-const price = Number(document.querySelector("#work-price").textContent.replace("원", ""));
-const [productName, painterName] = document.querySelector("#work-name").textContent.split(" | ");
 
 function addCart(){
     let cartList = JSON.parse(localStorage.getItem("cart"));
     if(cartList === null){
         cartList = [];
     }
+
+    const price = Number(document.querySelector("#work-price").value.replace("원", ""));
+    const [productName, painterName] = document.querySelector("#work-name").value.split(" | ");
 
     const wantToCart = {
         productName: productName,
