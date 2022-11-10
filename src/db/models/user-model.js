@@ -24,8 +24,8 @@ export class UserModel {
     return users;
   }
 
-  async findPainters(){
-    const painters = await User.find({role: "painter-user"})
+  async findPainters() {
+    const painters = await User.find({ role: "painter-user" });
     return painters;
   }
 
@@ -38,7 +38,7 @@ export class UserModel {
   }
 
   async delete(userNumber) {
-    return await User.findOneAndDelete({userNumber});
+    return await User.findOneAndDelete({ userNumber });
   }
 }
 
