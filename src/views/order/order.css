@@ -5,8 +5,17 @@ body {
 }
 
 .page-inner {
-    margin: 60px 100px 80px 100px;
-    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-inner-left {
+    width: 60%
+}
+
+.page-inner-right {
+    width: 35%
 }
 
 .order {
@@ -53,7 +62,7 @@ body {
     border-bottom: 0.3px solid #ffd18c;
     cursor: pointer;
     position: absolute;
-    right: 290px;
+    left: 250px;
 
 }
 .notification-list {
@@ -69,6 +78,21 @@ body {
     list-style: disc;
     margin-top: 5px;
     padding-left: 5px;
+}
+
+.order-total {
+    display: flex;
+}
+
+.total-price-label {
+    width: 45%;
+    font-weight: 700;
+}
+
+.total-price {
+    width: 55%;
+    text-align: right;
+    font-weight: 700;
 }
 
 .order-btn {

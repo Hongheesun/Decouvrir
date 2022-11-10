@@ -71,6 +71,7 @@ body {
 
 .sub-title {
   text-align: center;
+  cursor: pointer;
 }
 
 .work {

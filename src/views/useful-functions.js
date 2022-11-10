@@ -72,3 +72,25 @@ export const checkLogin = () => {
     window.location.replace(`/login?previouspage=${pathname + search}`);
   }
 };
+
+// 해당 주소로 이동하는 콜백함수를 반환함. addEventListener에서 사용하려고
+export const location = (pathname) => {
+  return function () {
+    window.location.href = pathname;
+  };
+};
+
+
+// 주소창의 url로부터 params를 얻어 객체로 만듦
+export const getUrlParams = () => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  const result = {};
+
+  for (const [key, value] of urlParams) {
+    result[key] = value;
+  }
+
+  return result;
+};
