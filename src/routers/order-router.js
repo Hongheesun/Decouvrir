@@ -5,7 +5,7 @@ import { orderService } from "../services";
 
 const orderRouter = Router();
 
-// 주문 생성
+// 주문 생성 //
 orderRouter.post("/order", loginRequired, async (req, res, next) => {
   try {
     req.body.userEmail = req.currentUserId;

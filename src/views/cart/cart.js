@@ -85,7 +85,7 @@ function allDelete() {
 
 allDeleteBtn.addEventListener("click", allDelete);
 
-// 주문하기 btn
+// 주문하기 btn //
 const buyAllBtn = document.querySelector(".all-item-order-btn");
 
 function buyAllItem() {

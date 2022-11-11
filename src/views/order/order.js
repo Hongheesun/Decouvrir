@@ -47,19 +47,6 @@ async function order() {
   await Api.post("/api/order", data);
   alert("주문이 정상적으로 완료되었습니다.");
   window.location.href = "/order-finished";
-  //   } catch (err) {}
-
-  // const userUpdateData = {
-  //   phoneNumber: "전화번호",
-  // };
-
-  // await Api.post("/api/order", userUpdateData);
-
-  // alert("주문이 정상적으로 완료되었습니다.");
-  // window.location.href = "/order/complete";
-  //   } catch (err) {
-  //     alert(`문제가 발생하였습니다.\n${err}`);
-  //   }
 }
 
 payButton.addEventListener("click", order);
