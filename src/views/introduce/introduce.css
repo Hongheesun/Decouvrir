@@ -1,0 +1,12 @@
+body {
+  background-color: #b4cac6;
+  height: 100vh;
+  position: relative;
+}
+
+.introduce-wrapper {
+  padding-top: 100px;
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
