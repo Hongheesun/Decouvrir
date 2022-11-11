@@ -18,7 +18,7 @@ async function renderMonthlyPainters() {
           <div class="painter-name">${painters[i]["painterName"]}</div>
           <div class="painter-introduce">${painters[i]["introduce"]}</div>
         <div class="card-footer">
-          <a href="#" >작가 페이지</a>
+          <a href=""/painter/?name=${painters[i].painterName}" >작가 페이지</a>
         </div>
       </div>`;
 

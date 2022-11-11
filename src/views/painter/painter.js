@@ -9,7 +9,7 @@ let painterExplainVal = document.getElementById('painter-explain');
 async function changeText(){
     const painters = await Api.get("/api/monthlyPainter");
     painters.forEach((painter) => {
-        if(painter.painterName = painterName){
+        if(painter.painterName === painterName){
             painterNameVal.innerHTML = painter.painterName;
             painterExplainVal.innerHTML = painter.introduce;
         }
