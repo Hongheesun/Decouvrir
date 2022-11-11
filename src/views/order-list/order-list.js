@@ -1,8 +1,0 @@
-
-function addOrderList(){
-
-}
-
-function addOrderItem(){
-    
-}
