@@ -4,8 +4,10 @@ const ordererName = document.getElementById("fullNameInput");
 const ordererTel = document.getElementById("phoneNumberInput");
 
 // 주문자 정보 입력
+
+let userData;
 async function inputOrdererInfo() {
-  const userData = await Api.get("/api/user");
+  userData = await Api.get("/api/user");
   console.log(userData);
   ordererEmail.value = userData.email || null;
   ordererName.value = userData.fullName || null;
@@ -19,6 +21,7 @@ const deliveryTel = document.querySelector("#recipientPhoneNumberInput");
 const deliveryAddress = document.querySelector("#recipientAddressInput");
 const deliveryMsg = document.querySelector("#delieveryMessageInput");
 const payButton = document.querySelector("#payButton");
+const sameButton = document.querySelector(".same-shipping-btn");
 // const sameAsUserBtn = document.querySelectorAll(".same-shipping-btn");
 // sameAsUserBtn[0]은
 
@@ -48,4 +51,19 @@ async function order() {
   window.location.href = "/order-finished";
 }
 
+// 배송 정보 입력
+function inputUserDeliverInfo() {
+  console.log(userData);
+  deliveryName.value = userData.fullName;
+
+  if (userData.phoneNumber) {
+    deliveryTel.value = userData.phoneNumber;
+  }
+
+  if (userData.address) {
+    deliveryAddress.value = userData.address;
+  }
+}
+
+sameButton.addEventListener("click", inputUserDeliverInfo);
 payButton.addEventListener("click", order);
