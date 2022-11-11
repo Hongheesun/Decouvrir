@@ -1,45 +1,34 @@
-async function getProducts() {
-  let url = `/api/products`;
-  try {
-    let res = await fetch(url);
-    return await res.json();
-  } catch (error) {
-    console.log(error);
-  }
-}
+import * as Api from "../api.js";
 
 const abstract = "6368f390b4a8016623514ea2";
 const landscape = "6368f39db4a8016623514ea6";
 const illustration = "6368f3abb4a8016623514eae";
 const asian = "6368f3b0b4a8016623514eb2";
 
-async function renderProducts(category, wrapperName) {
-  let products = await getProducts();
-  const arr = [];
-  console.log(products);
-  let html = "";
+// 카테고리에 해당하는 상품 추가 
+async function renderProducts(categoryId, categoryWorkWrapper) {
+  let products = await Api.get("/api/products");
+  let productsContent = "";
+  let arr = [];
   products.forEach((data) => {
-    if (data["categoryId"] == category) {
+    if (data["categoryId"] == categoryId) {
       arr.push(data);
     }
-    console.log(arr);
   });
   for (let i = 0; i < 4; i++) {
-    let htmlSegment = `   
-    <li class="work">
-      <div class="product-image"></div>
-      <span class="work-info">
-          <span>${arr[i].painterName} | ${arr[i].productName}
+      productsContent += `
+      <li class="work">
+          <div class="product-image">
+            <img src="" alt="상품사진">
+          </div>
+          <span class="work-info">
+              <span>${arr[i].painterName} | ${arr[i].productName}</span>
           </span>
-      </span>
-      <span class="price">${arr[i].price}</span>
-    </li>`;
-
-    html += htmlSegment;
-  }
-
-  let container = document.querySelector(wrapperName);
-  container.innerHTML = html;
+          <span class="price">${arr[i].price}</span>
+      </li>`; 
+  } 
+  let container = document.querySelector(categoryWorkWrapper);
+  container.innerHTML = productsContent;
 }
 
 renderProducts(abstract, "#abstract-work-wrapper");
