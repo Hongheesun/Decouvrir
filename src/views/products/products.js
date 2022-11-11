@@ -1,25 +1,21 @@
 import * as Api from "../api.js";
 
-const abstract = "6368f390b4a8016623514ea2";
-const landscape = "6368f39db4a8016623514ea6";
-const illustration = "6368f3abb4a8016623514eae";
-const asian = "6368f3b0b4a8016623514eb2";
-
 // 카테고리에 해당하는 상품 추가 
-async function renderProducts(categoryId, categoryWorkWrapper) {
+async function renderProducts(categoryName, categoryWorkWrapper) {
   let products = await Api.get("/api/products");
   let productsContent = "";
   let arr = [];
   products.forEach((data) => {
-    if (data["categoryId"] == categoryId) {
+    if (data.category == categoryName) {
       arr.push(data);
     }
   });
+  console.log(arr);
   for (let i = 0; i < 4; i++) {
       productsContent += `
       <li class="work">
           <div class="product-image">
-            <img src="" alt="상품사진">
+            <a href="/products/detail?id=${arr[i]._id}"><img src="" alt="상품사진">
           </div>
           <span class="work-info">
               <span>${arr[i].painterName} | ${arr[i].productName}</span>
@@ -31,7 +27,7 @@ async function renderProducts(categoryId, categoryWorkWrapper) {
   container.innerHTML = productsContent;
 }
 
-renderProducts(abstract, "#abstract-work-wrapper");
-renderProducts(asian, "#asian-work-wrapper");
-renderProducts(landscape, "#landscape-work-wrapper");
-renderProducts(illustration, "#illustration-work-wrapper");
+renderProducts("abstract", "#abstract-work-wrapper");
+renderProducts("asian", "#asian-work-wrapper");
+renderProducts("landscape", "#landscape-work-wrapper");
+renderProducts("illustration", "#illustration-work-wrapper");
