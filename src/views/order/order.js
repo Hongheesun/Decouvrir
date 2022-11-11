@@ -37,7 +37,6 @@ async function order() {
     return alert("배송지 정보를 입력해주세요.");
   }
 
-  // try {
   const data = {
     products: JSON.parse(localStorage.getItem("cart")),
     recipientName: deliveryName.value,

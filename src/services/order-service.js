@@ -56,7 +56,7 @@ class OrderService {
   // orderService.getAllOrders(req.body.userId);
   async getAllOrders(userId) {
     return await orderModel.findAll(userId);
-  } // userId에 맞는 주문 다 가져오기 ////
+  } // userId에 맞는 주문 다 가져오기
 
   async deleteOrder(orderId) {
     return await orderModel.delete(orderId);
