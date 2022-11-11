@@ -61,7 +61,6 @@ insertUserData();
 
 //// 유저 정보 수정하기 ////
 async function updateUserData() {
-  // const data = {};
   const fullName = fullNameInput.value;
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;

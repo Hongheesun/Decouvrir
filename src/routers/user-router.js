@@ -152,7 +152,7 @@ userRouter.patch(
         ...(introduce && { introduce }),
       };
 
-      // 사용자 정보를 업데이트함.
+      // 사용자 정보를 업데이트
       const updatedUserInfo = await userService.setUser(userInfo, toUpdate);
 
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
