@@ -24,7 +24,7 @@ async function renderProducts() {
       
       <button class="open-toggle-button" onClick="showToggle()">수정하기</button> 
       <button class="open-toggle-button" onClick="addCart(${data["seq"]})">장바구니</button> 
-
+      <button class="open-toggle-button" onClick="buyNow(${data["seq"]})">구매하기</button> 
       <form class="toggle-page">
         <button class="closeBtn" onClick="closeToggle()">X</button>
         <input class="is-medium search-input name" type="text" placeholder="상품명을 입력하세요.">
@@ -192,33 +192,24 @@ function addCart(seq) {
   if (cartList === null) {
     cartList = [];
   }
-  //const price = data["price"];
-  // const [artistName, productName] = document.querySelector(data["price"]).textContent.split(" | ");
 
-  // 작품이름, 가격, 이미지 + 작가이름 + 프로덕트 아이디
   const wantToCart = {
-    // name: data["productName"],
-    // price: data["price"],
-    // image: data["image"],
-    // artistName: data["painterEmail"],
     productId: seq,
   };
-  // 기존 장바구니 리스트에 현재 작품이 있다면 error?
-  if (cartList.length == 0) {
-    cartList.push(wantToCart);
-    localStorage.setItem("cart", JSON.stringify(cartList));
-  } else {
-    cartList.forEach((data) => {
-      if (data["productId"] == seq) {
-        alert("존재");
-      }
-    });
-    cartList.push(wantToCart);
-    localStorage.setItem("cart", JSON.stringify(cartList));
+  // 기존 장바구니 리스트에 현재 작품이 있는 경우
+  let check = true;
+  for(let elem of cartList){
+    if(elem["productId"] === seq){
+      check = false;
+      alert("동일한 상품이 이미 장바구니에 담겨있습니다.");
+      break;
+    }
   }
-  // 기존 장바구니 리스트에 현재 작품까지 넣음.
-
-  // 로컬스토리지에 추가
+  
+  if(check) {
+    cartList.push(wantToCart);
+  }
+  localStorage.setItem("cart", JSON.stringify(cartList));
 }
 
 // addCartBtn.addEventListener("click", addCart);
@@ -226,16 +217,18 @@ function addCart(seq) {
 // 구매하기 +
 // const buyBtn = document.querySelector(".BuyNow");
 
-// function buyNow() {
-//   const price = Number(
-//     document.querySelector("#work-price").textContent.replace("원", "")
-//   );
-
-//   const buyList = {
-//     productId: document.querySelector("#product-id").name,
-//     price: price,
-//   };
-//   localStorage.setItem("buy", JSON.stringify(buyList));
-// }
+function buyNow(seq){
+    const buyList = [{
+        productId: seq,
+    }];
+    localStorage.setItem("buy-direct", JSON.stringify(buyList));
+    // 로그인을 하지 않은 경우 
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+        alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
+        window.location.replace("/login?order");
+    }
+    window.location.replace("/order");
+}
 
 // buyBtn.addEventListener("click", buyNow);
