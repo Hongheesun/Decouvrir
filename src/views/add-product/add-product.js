@@ -63,13 +63,13 @@ async function addProduct(e) {
     });
 
   if (category === "abstract") {
-    categoryId = "636ce421852cc32cf0f46591";
+    categoryId = "636e362dffde000765aac0ce";
   } else if (category === "landscape") {
-    categoryId = "636ce42f852cc32cf0f46595";
+    categoryId = "636e3647ffde000765aac0da";
   } else if (category === "illustration") {
-    categoryId = "636ce44d852cc32cf0f4659d";
+    categoryId = "636e3634ffde000765aac0d2";
   } else if (category === "asian") {
-    categoryId = "636ce439852cc32cf0f46599";
+    categoryId = "636e3640ffde000765aac0d6";
   }
 
   //   console.error(err.stack);

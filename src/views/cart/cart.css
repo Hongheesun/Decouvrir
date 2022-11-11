@@ -1,7 +1,7 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -113,6 +113,10 @@ body {
   display: flex;
   justify-content: space-between;
   color: #fff;
+}
+
+.cart-img {
+  width: 150px;
 }
 
 .cart-total-price {

@@ -20,7 +20,7 @@ async function renderProducts(categoryName, categoryWorkWrapper) {
           <span class="work-info">
               <span>${arr[i].painterName} | ${arr[i].productName}</span>
           </span>
-          <span class="price">${arr[i].price}</span>
+          <span class="price">${arr[i].price} 원</span>
       </li>`;
   }
   let container = document.querySelector(categoryWorkWrapper);
