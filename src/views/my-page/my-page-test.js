@@ -112,11 +112,11 @@ async function updateUserData() {
   }
 
   if (painterName !== userData.painterName) {
-    data.painterName = password;
+    data.painterName = painterName;
   }
 
   if (introduce !== userData.Introduce) {
-    data.introduce = password;
+    data.introduce = introduce;
   }
 
   if (phoneNumber !== userData.phoneNumber) {

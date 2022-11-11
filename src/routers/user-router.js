@@ -129,6 +129,8 @@ userRouter.patch(
         phoneNumber,
         role,
         currentPassword,
+        painterName,
+        introduce,
       } = req.body;
 
       // currentPassword 없을 시, 진행 불가
@@ -146,6 +148,8 @@ userRouter.patch(
         ...(address && { address }),
         ...(phoneNumber && { phoneNumber }),
         ...(role && { role }),
+        ...(painterName && { painterName }),
+        ...(introduce && { introduce }),
       };
 
       // 사용자 정보를 업데이트함.
