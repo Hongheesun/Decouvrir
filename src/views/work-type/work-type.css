@@ -12,11 +12,16 @@ img {
 }
 
 body {
-  background-color: #000;
+  background-color: #b4cac6;
+  height: 120vh;
+  position: relative;
+  color: white;
+}
+
+.wrapper {
+  padding-top: 100px;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  height: 200vh;
 }
 
 /* .all-work-type {
@@ -51,6 +56,8 @@ body {
 }
 
 .sub-title {
+  font-size: 30px;
+  font-weight: 700;
   text-align: center;
 }
 
