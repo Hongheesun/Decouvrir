@@ -44,14 +44,8 @@
 }
 
 #withdrawButton {
-  /* background-color: #fff;
-  border: 3px solid #c692a3; */
   background-color: #bfa0ab;
 }
-
-/* .field:nth-child(1) {
-  display: flex;
-} */
 
 .logoutButton {
   width: 73px;
@@ -64,4 +58,8 @@
   padding: 3px;
   font-weight: 800;
   cursor: pointer;
+}
+
+#introduceInput {
+  margin-bottom: 20px;
 }

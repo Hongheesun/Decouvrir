@@ -63,19 +63,28 @@ body {
   font-weight: 800;
 }
 
-/* .field:nth-of-type(7) {
-    margin: 20px 0;
-    font-weight: 800;
-    display: flex;
-    justify-content: space-between;
-  } */
+.same-shipping-btn {
+  width: 140px;
+  height: 30px;
+  text-align: center;
+  border: 3px solid #99bab5e0;
+  border-radius: 10px;
+  color: #99bab5e0;
+  font-weight: 800;
+  background-color: transparent;
+  cursor: pointer;
+  /* align-self: flex-end; */
+  margin-bottom: 20px;
+  font-size: 13px;
+}
 
 .painter-user-form-container {
   display: none;
   margin-bottom: 30px;
 }
 
-#submitButton {
+#submitButton,
+#payButton {
   background-color: #99bab5e0;
 }
 

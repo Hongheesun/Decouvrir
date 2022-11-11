@@ -66,6 +66,7 @@ function addCart() {
   }
 
   localStorage.setItem("cart", JSON.stringify(cartList));
+  alert("장바구니 넣기 성공!");
 }
 
 addCartBtn.addEventListener("click", addCart);
@@ -90,14 +91,17 @@ function buyNow() {
     },
   ];
   localStorage.setItem("buy-direct", JSON.stringify(buyList));
-
+  // alert("장바구니 넣기 성공!");
   // 로그인을 하지 않은 경우
   const token = sessionStorage.getItem("token");
   if (!token) {
     alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
-    window.location.replace("/login?order");
+    window.location.replace("/login");
   }
-  window.location.replace("/order");
+  //else {
+  //   alert("장바구니 넣기 성공!");
+  // }
+  window.location.replace("/login");
 }
 
 buyBtn.addEventListener("click", buyNow);

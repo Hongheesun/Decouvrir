@@ -5,9 +5,10 @@
 }
 
 body {
-  height: 160vh;
+  height: 200vh;
   position: relative;
   background-color: #b4cac6;
+  /* background-color: #43514e; */
 }
 
 .cart-container {
