@@ -7,7 +7,7 @@ const priceInput = document.querySelector("#price");
 const categoryInput = document.querySelector("#category");
 
 const photoFile = document.querySelector("#image");
-
+let image = "";
 //console.log(formData);
 
 let painterEmail = "";
@@ -23,10 +23,10 @@ async function insertUserData() {
 }
 
 insertUserData();
-postBtn.addEventListener("click", addProduct);
 
 ///////
-async function addProduct() {
+async function addProduct(e) {
+  e.preventDefault();
   const productName = productNameInput.value;
   const content = contentInput.value;
   const price = priceInput.value;
@@ -35,16 +35,31 @@ async function addProduct() {
   const formData = new FormData();
   formData.append("image", photoFile.files[0]); // 파일 첨부
 
-  // let result = "";
-  let image = "";
   fetch(`/api/images/upload`, {
     method: "POST",
-    body: JSON.stringify(formData),
+    body: formData,
   })
     .then((response) => response.json())
     .then((data) => {
       alert(data.imagePath);
+      image = data.imagePath;
       console.log(data.imagePath);
+      const data2 = {
+        painterEmail,
+        painterName,
+        productName,
+        price,
+        content,
+        category,
+        categoryId,
+        image,
+      };
+
+      //try {
+      // console.log(data);
+      console.log(data2);
+      Api.post(`/api/product`, data2);
+      // }  catch (err) {
     });
 
   if (category === "abstract") {
@@ -57,22 +72,9 @@ async function addProduct() {
     categoryId = "636ce439852cc32cf0f46599";
   }
 
-  const data = {
-    painterEmail,
-    painterName,
-    productName,
-    price,
-    content,
-    category,
-    categoryId,
-    image,
-  };
-
-  //try {
-  console.log(data);
-  await Api.post(`/api/product`, data);
-  // }  catch (err) {
   //   console.error(err.stack);
   //   alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   // }
 }
+
+postBtn.addEventListener("click", addProduct);

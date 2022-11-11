@@ -94,6 +94,8 @@ async function handleSubmit(e) {
 
     await Api.post("/api/register", data);
 
+    console.log(data);
+
     alert(`정상적으로 회원가입되었습니다.`);
 
     // 로그인 페이지 이동
