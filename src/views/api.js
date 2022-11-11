@@ -90,10 +90,8 @@ async function patch(endpoint, params = "", data) {
 // 여기서는 우선 delete 대신 del로 쓰고 아래 export 시에 delete로 alias 함.
 async function del(endpoint, params = "") {
   const apiUrl = `${endpoint}/${params}`;
-  // const bodyData = JSON.stringify(data);
 
   console.log(`DELETE 요청 ${apiUrl}`);
-  console.log(`DELETE 요청 데이터: ${bodyData}`);
 
   const res = await fetch(apiUrl, {
     method: "DELETE",
@@ -101,7 +99,6 @@ async function del(endpoint, params = "") {
       "Content-Type": "application/json",
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
-    // body: bodyData,
   });
 
   // 응답 코드가 4XX 계열일 때 (400, 403 등)

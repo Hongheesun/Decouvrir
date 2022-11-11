@@ -73,7 +73,6 @@ export const checkLogin = () => {
   }
 };
 
-
 // 해당 주소로 이동하는 콜백함수를 반환함. addEventListener에서 사용하려고
 export const location = (pathname) => {
   return function () {

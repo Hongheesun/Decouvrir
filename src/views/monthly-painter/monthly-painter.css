@@ -23,7 +23,7 @@ body {
 .painter-card {
   width: 250px;
   height: 250px;
-  margin-right: 60px;
+  margin-right: 40px;
   background-color: #fff;
   border-radius: 10px;
   padding: 20px;
@@ -36,8 +36,17 @@ body {
   box-shadow: 2px 2px 2px 2px #809390 inset;
 }
 
+/* .painer-card:first-of-type {
+  margin-right: 60px;
+} */
+.painter-card:nth-child(3) {
+  margin-right: 0;
+}
+
 .monthly-painters {
   display: flex;
+  /* width: 70%;
+  justify-content: space-between; */
 }
 
 .painter-name {

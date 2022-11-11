@@ -129,6 +129,8 @@ userRouter.patch(
         phoneNumber,
         role,
         currentPassword,
+        painterName,
+        introduce,
       } = req.body;
 
       // currentPassword 없을 시, 진행 불가
@@ -146,9 +148,11 @@ userRouter.patch(
         ...(address && { address }),
         ...(phoneNumber && { phoneNumber }),
         ...(role && { role }),
+        ...(painterName && { painterName }),
+        ...(introduce && { introduce }),
       };
 
-      // 사용자 정보를 업데이트함.
+      // 사용자 정보를 업데이트
       const updatedUserInfo = await userService.setUser(userInfo, toUpdate);
 
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
@@ -158,6 +162,8 @@ userRouter.patch(
     }
   }
 );
+
+// 유저 delete 변경
 userRouter.delete(
   "/user/:userNumber",
   loginRequired,
