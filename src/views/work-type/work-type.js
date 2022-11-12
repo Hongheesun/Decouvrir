@@ -3,7 +3,7 @@ import { location, getUrlParams } from "../../useful-functions.js";
 
 let categoryName = document.querySelector(".sub-title");
 let categoryItemList = document.querySelector(".work-wrapper");
-
+// goToAddProductPage();
 async function renderProducts() {
   const { category } = getUrlParams();
   categoryName.innerHTML = category;
@@ -15,8 +15,10 @@ async function renderProducts() {
     if (data.category === category) {
       productsContent += `
                 <li class="work">
-                    <div class="product-image">
-                        <a href="/products/detail?id=${data._id}"><img src="${data.image}" id= "${data._id}" alt="상품사진"></a>
+                    <div class="product-image"  class="img-a">
+                        <a href="/products/detail?id=${data._id}">
+                          <img src="${data.image}" id= "${data._id}" alt="상품사진">
+                        </a>
                     </div>
                     <span class="work-info">
                         <span class="painter">${data.painterName}</span>
@@ -62,27 +64,6 @@ function closeToggle() {
   const togglePage = document.querySelector(".toggle-page");
   togglePage.style.display = "none";
 }
-
-// openToggleButton.addEventListener("click", showToggle);
-
-// // closeBtn.addEventListener("click", closeAddPage);
-
-// const openToggleButton = document.querySelector(".open-toggle-button");
-// const togglePage = document.querySelector(".toggle-page");
-// const closeBtn = document.querySelector(".closeBtn");
-
-// function showToggle() {
-//   console.log("click 함수");
-//   // if (togglePage.style.display == "none") {
-//   togglePage.style.display = "block";
-//   // } else {
-//   //   togglePage.style.display = "none";
-//   // }
-// }
-
-// function closeToggle() {
-//   togglePage.style.display = "none";
-// }
 
 function updateProduct(seq) {
   let productName = document.querySelector(".name").value;

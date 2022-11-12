@@ -8,7 +8,6 @@
 // let userData;
 // async function inputOrdererInfo() {
 //   userData = await Api.get("/api/user");
-//   console.log(userData);
 //   ordererEmail.value = userData.email || null;
 //   ordererName.value = userData.fullName || null;
 //   ordererTel.value = userData.phoneNumber || null;
@@ -30,6 +29,10 @@
 
 // // 결제진행
 // // const orderBtn = document.querySelector(".order-btn");
+// const buyList =
+//   JSON.parse(localStorage.getItem("buy-direct")) ||
+//   JSON.parse(localStorage.getItem("buy-cart"));
+// console.log("buyList: ", buyList);
 
 // async function order() {
 //   if (!ordererTel.value) {
@@ -40,15 +43,41 @@
 //     return alert("배송지 정보를 입력해주세요.");
 //   }
 
+//   // 주문 정보 및 유저 post 요청
+//   //try {
 //   const data = {
-//     products: JSON.parse(localStorage.getItem("cart")),
+//     products: buyList,
 //     recipientName: deliveryName.value,
 //     recipientPhoneNumber: deliveryTel.value,
 //     recipientAddress: deliveryAddress.value,
 //   };
+//   console.log(data);
+//   //debugger;
 //   await Api.post("/api/order", data);
+
+//   // const userUpdateData = {
+//   //   phoneNumber: ordererTel.value,
+//   // };
+
+//   // await Api.patch("/api/users", userData._id, userUpdateData);
+
 //   alert("주문이 정상적으로 완료되었습니다.");
 //   window.location.href = "/order-finished";
+
+//   // buylist 지우기
+//   if (buyList == JSON.parse(localStorage.getItem("buy-direct"))) {
+//     localStorage.removeItem("buy-direct");
+//   } else {
+//     console.log("hi");
+//     localStorage.removeItem("buy-cart");
+//     localStorage.removeItem("cart");
+//   }
+
+//   //}
+//   // catch (err) {
+//   //   console.error(err);
+//   //   alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+//   // }
 // }
 
 // // 배송 정보 입력
@@ -102,7 +131,6 @@ const buyList =
   JSON.parse(localStorage.getItem("buy-direct")) ||
   JSON.parse(localStorage.getItem("buy-cart"));
 console.log("buyList: ", buyList);
-
 async function order() {
   if (!ordererTel.value) {
     return alert("주문자 전화번호를 입력해주세요.");
@@ -113,40 +141,37 @@ async function order() {
   }
 
   // 주문 정보 및 유저 post 요청
-  //try {
-  const data = {
-    products: buyList,
-    recipientName: deliveryName.value,
-    recipientPhoneNumber: deliveryTel.value,
-    recipientAddress: deliveryAddress.value,
-  };
-  console.log(data);
-  //debugger;
-  await Api.post("/api/order", data);
+  try {
+    const data = {
+      products: buyList,
+      recipientName: deliveryName.value,
+      recipientPhoneNumber: deliveryTel.value,
+      recipientAddress: deliveryAddress.value,
+    };
 
-  // const userUpdateData = {
-  //   phoneNumber: ordererTel.value,
-  // };
+    await Api.post("/api/order", data);
 
-  // await Api.patch("/api/users", userData._id, userUpdateData);
+    // const userUpdateData = {
+    //   phoneNumber: ordererTel.value,
+    // };
 
-  alert("주문이 정상적으로 완료되었습니다.");
-  window.location.href = "/order-finished";
+    // await Api.patch("/api/users", userData._id, userUpdateData);
 
-  // buylist 지우기
-  if (buyList == JSON.parse(localStorage.getItem("buy-direct"))) {
-    localStorage.removeItem("buy-direct");
-  } else {
-    console.log("hi");
-    localStorage.removeItem("buy-cart");
-    localStorage.removeItem("cart");
+    alert("주문이 정상적으로 완료되었습니다.");
+
+    // buylist 지우기
+    if (buyList == JSON.parse(localStorage.getItem("buy-direct"))) {
+      localStorage.removeItem("buy-direct");
+    } else {
+      localStorage.removeItem("buy-cart");
+      localStorage.removeItem("cart");
+    }
+
+    window.location.href = "/order-finished";
+  } catch (err) {
+    console.error(err);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
-
-  //}
-  // catch (err) {
-  //   console.error(err);
-  //   alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-  // }
 }
 
 // 배송 정보 입력

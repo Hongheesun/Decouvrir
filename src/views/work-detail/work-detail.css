@@ -98,6 +98,12 @@ button {
 
 .work-buttons {
   margin-top: 30px;
+  /* cursor: pointer; */
+}
+
+.BuyNow,
+.addCart {
+  cursor: pointer;
 }
 
 /*
