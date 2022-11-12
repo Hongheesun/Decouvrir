@@ -1,3 +1,5 @@
+// import { addCommas } from "/useful-functions.js";
+
 let cartItemList = document.querySelector("#cart-item-list");
 let cartList = JSON.parse(localStorage.getItem("cart"));
 
@@ -11,8 +13,9 @@ function addCartItemList(cartList) {
                 <li class="cart-item">
                     <div class="cart-item-column">
                     <div class="img-container">
-                        <a href="/products/detail?id=${item.productId}">
-                        <img class="cart-img" src="${item.image}" alt="작품사진"></a>
+                        <a href="/products/detail?id=${item.productId}" >
+                          <img class="cart-img" src="${item.image}" alt="작품사진">
+                        </a>
                     </div>
                     </div>
                     
