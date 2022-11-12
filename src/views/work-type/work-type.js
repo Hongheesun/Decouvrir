@@ -3,7 +3,7 @@ import { location, getUrlParams } from "../../useful-functions.js";
 
 let categoryName = document.querySelector(".sub-title");
 let categoryItemList = document.querySelector(".work-wrapper");
-
+// goToAddProductPage();
 async function renderProducts() {
   const { category } = getUrlParams();
   categoryName.innerHTML = category;

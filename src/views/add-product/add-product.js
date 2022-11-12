@@ -1,4 +1,7 @@
 import * as Api from "/api.js";
+import { goToAddProductPage } from "../../useful-functions.js";
+
+goToAddProductPage();
 
 const postBtn = document.querySelector("#postButton");
 const productNameInput = document.querySelector("#name");

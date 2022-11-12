@@ -78,3 +78,15 @@ body {
   -ms-transform: scale(1.2);
   -o-transform: scale(1.2);
 }
+
+.add-product-button {
+  color: #b4cac6;
+  background-color: #fff;
+  padding: 10px 0;
+  width: 100px;
+  text-align: center;
+  border-radius: 10px;
+  align-self: flex-end;
+  font-size: 14px;
+  font-weight: 700;
+}

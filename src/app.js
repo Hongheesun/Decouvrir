@@ -1,6 +1,13 @@
 import cors from "cors";
 import express from "express";
-import { viewsRouter, userRouter, productRouter, orderRouter, categoryRouter, imageRouter } from "./routers";
+import {
+  viewsRouter,
+  userRouter,
+  productRouter,
+  orderRouter,
+  categoryRouter,
+  imageRouter,
+} from "./routers";
 import { errorHandler } from "./middlewares";
 const fs = require("fs");
 
@@ -26,7 +33,13 @@ app.use("/api", orderRouter);
 app.use("/api", productRouter);
 app.use("/api/images", imageRouter);
 app.use("/api/category", categoryRouter);
-
+// app.all("*", (req, res, next) => {
+//   let data = {
+//     code: "404",
+//     message: "존재하지 않는 페이지 입니다..!",
+//   };
+//   res.send(data);
+// });
 // 동영상 업로드
 
 app.use(express.static("views"));
