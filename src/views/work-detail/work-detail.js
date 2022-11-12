@@ -98,10 +98,8 @@ function buyNow() {
     alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
     window.location.replace("/login");
   }
-  //else {
-  //   alert("장바구니 넣기 성공!");
-  // }
-  window.location.replace("/login");
+
+  window.location.replace("/order");
 }
 
 buyBtn.addEventListener("click", buyNow);
