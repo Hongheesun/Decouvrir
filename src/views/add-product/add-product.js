@@ -1,7 +1,5 @@
 import * as Api from "/api.js";
-import { goToAddProductPage } from "../../useful-functions.js";
-
-goToAddProductPage();
+import { goToAddProductPage } from "/useful-functions.js";
 
 const postBtn = document.querySelector("#postButton");
 const productNameInput = document.querySelector("#name");
@@ -16,17 +14,20 @@ let image = "";
 let painterEmail = "";
 let painterName = "";
 let categoryId = "";
-
+let role = "";
 let userData;
 
 async function insertUserData() {
   userData = await Api.get("/api/user");
   painterEmail = userData.email;
   painterName = userData.painterName;
+  role = userData.role;
+  console.log(userData);
+  goToAddProductPage(role);
 }
 
 insertUserData();
-
+//
 ///////
 async function addProduct(e) {
   e.preventDefault();
