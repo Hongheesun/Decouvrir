@@ -38,27 +38,24 @@ export const goToMypage = () => {
 };
 
 export const goToAddProductPage = (role) => {
-  if (role === "painter-user") {
-    window.location.replace("/add-product");
+  // const token = sessionStorage.getItem("token");
+  console.log(role);
+  const token = sessionStorage.getItem("token");
+
+  if (role == "painter-user") {
+    const pathname = window.location.pathname;
+    const search = window.location.search;
+    window.location.replace(`/${pathname + search}`);
   } else {
     alert("작가인 경우에만 상품 등록이 가능합니다!");
     window.location.replace("/");
   }
+  // } else if (!token) {
+  //   alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+  //   window.location.replace("/login");
+  //   return;
+  // }
 };
-
-// export const logout = () => {
-//   const token = sessionStorage.getItem("token");
-
-//   if (token) {
-//     console.log("click!");
-//     sessionStorage.removeItem("token");
-//     alert("로그아웃 성공!");
-//     window.location.replace("/");
-//   } else {
-//     alert("로그인 먼저 해주세요!");
-//     window.location.replace("/login");
-//   }
-// };
 
 // 로그인 여부(토큰 존재 여부) 확인
 export const checkLogin = () => {
@@ -79,7 +76,6 @@ export const location = (pathname) => {
     window.location.href = pathname;
   };
 };
-
 
 // 주소창의 url로부터 params를 얻어 객체로 만듦
 export const getUrlParams = () => {
