@@ -1,5 +1,5 @@
 import * as Api from "/api.js";
-import { goToAddProductPage } from "/useful-functions.js";
+// import { goToAddProductPage } from "/useful-functions.js";
 
 const postBtn = document.querySelector("#postButton");
 const productNameInput = document.querySelector("#name");
@@ -23,7 +23,7 @@ async function insertUserData() {
   painterName = userData.painterName;
   role = userData.role;
   console.log(userData);
-  goToAddProductPage(role);
+  // goToAddProductPage(role);
 }
 
 insertUserData();
