@@ -14,12 +14,7 @@ body {
   width: 400px;
   margin-top: 30px;
   padding: 2.25rem;
-  /* background-color: #000; */
 }
-
-/* .register-user-form-box {
-  width: 30rem;
-} */
 
 .box {
   padding: 2.25rem;
@@ -103,7 +98,7 @@ body {
 }
 
 .toggle-switch label:after {
-  content: "";
+  content: '';
   display: block;
   width: 18px;
   height: 18px;
@@ -115,10 +110,10 @@ body {
   transition: left 0.3s ease-out;
 }
 
-.toggle-switch input[id="togle-swith"]:checked + label:after {
+.toggle-switch input[id='togle-swith']:checked + label:after {
   left: 21px;
 }
 
-.toggle-switch input[id="togle-swith"]:checked + label {
+.toggle-switch input[id='togle-swith']:checked + label {
   background: #99bab5e0;
 }

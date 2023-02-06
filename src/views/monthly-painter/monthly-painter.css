@@ -18,8 +18,7 @@ body {
   font-size: 35px;
   font-weight: 900;
   margin: 40px 0 70px 0;
-  font-family: "Dancing Script", cursive;
-  /* font-size: 60px; */
+  font-family: 'Dancing Script', cursive;
   color: rgb(121, 159, 146);
 }
 
@@ -39,17 +38,12 @@ body {
   box-shadow: 2px 2px 2px 2px #809390 inset;
 }
 
-/* .painer-card:first-of-type {
-  margin-right: 60px;
-} */
 .painter-card:nth-child(3) {
   margin-right: 0;
 }
 
 .monthly-painters {
   display: flex;
-  /* width: 70%;
-  justify-content: space-between; */
 }
 
 .painter-name {

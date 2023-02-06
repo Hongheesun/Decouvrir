@@ -13,9 +13,7 @@ const addressInput = document.querySelector("#addressInput");
 
 const submitButton = document.querySelector("#submitButton");
 const painterToggle = document.querySelector(".toggle-switch");
-// const painterRegisterPage = document.querySelector(
-//   ".painter-user-form-container"
-// );
+
 addAllElements();
 addAllEvents();
 

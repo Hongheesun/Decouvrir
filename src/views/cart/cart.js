@@ -1,4 +1,3 @@
-// import { addCommas } from "/useful-functions.js";
 
 let cartItemList = document.querySelector("#cart-item-list");
 let cartList = JSON.parse(localStorage.getItem("cart"));
@@ -94,12 +93,8 @@ const buyAllBtn = document.querySelector(".all-item-order-btn");
 function buyAllItem() {
   const buyList = JSON.parse(localStorage.getItem("cart")).map((elem) => {
     return {
-      // productName: elem.productName,
       productId: elem.productId,
-      // painterName: elem.painterName,
       price: elem.price,
-      // image: elem.image,
-      // productId: elem.productId,
     };
   });
   localStorage.setItem("buy-cart", JSON.stringify(buyList));

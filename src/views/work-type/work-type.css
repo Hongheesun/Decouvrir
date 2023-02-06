@@ -44,7 +44,6 @@ body {
   font-size: 30px;
   font-weight: 700;
   text-align: center;
-  /* font-family: "Dancing Script", cursive; */
 }
 
 .work {
@@ -69,7 +68,7 @@ body {
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   -o-transform: scale(1);
-  transition: all 0.3s ease-in-out; /* 부드러운 모션을 위해 추가*/
+  transition: all 0.3s ease-in-out;
 }
 .product-image:hover {
   transform: scale(1.2);

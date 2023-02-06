@@ -1,10 +1,7 @@
-//import * as Api from "/api.js";
 
 async function getProducts() {
   let url = `/api/products`;
-  // const res = await Api.get(url);
-  // console.log(res);
-  // return res.json();
+
   try {
     let res = await fetch(url);
     return await res.json();
@@ -75,10 +72,8 @@ function deleteProduct(seq) {
       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
     },
   })
-    // .then((res) => res.json())
     .then((data) => {
       console.log("delete 성공!");
-      //   return data;
     })
     .catch((err) => {
       console.log(err);
@@ -96,7 +91,6 @@ function newPage(seq) {
 function showToggle() {
   console.log("hi");
   const togglePage = document.querySelector(".toggle-page");
-  // const closeBtn = document.querySelector(".closeBtn");
   togglePage.style.display = "block";
 }
 
@@ -105,26 +99,6 @@ function closeToggle() {
   togglePage.style.display = "none";
 }
 
-// openToggleButton.addEventListener("click", showToggle);
-
-// // closeBtn.addEventListener("click", closeAddPage);
-
-// const openToggleButton = document.querySelector(".open-toggle-button");
-// const togglePage = document.querySelector(".toggle-page");
-// const closeBtn = document.querySelector(".closeBtn");
-
-// function showToggle() {
-//   console.log("click 함수");
-//   // if (togglePage.style.display == "none") {
-//   togglePage.style.display = "block";
-//   // } else {
-//   //   togglePage.style.display = "none";
-//   // }
-// }
-
-// function closeToggle() {
-//   togglePage.style.display = "none";
-// }
 
 function updateProduct(seq) {
   let productName = document.querySelector(".name").value;
@@ -154,37 +128,8 @@ function updateProduct(seq) {
     })
     .catch((err) => console.log(err));
 
-  // closeAddPage();
 }
 
-// togglePage.addEventListener("submit", updateProduct(seq));
-
-////////   장바구니
-// function addCart(seq){
-//   console.log("click")
-//   let cartList = JSON.parse(localStorage.getItem("cart"));
-//   if(cartList === null){
-//       cartList = [];
-//   }
-//   //const price = data["price"];
-//   // const [artistName, productName] = document.querySelector(data["price"]).textContent.split(" | ");
-
-//   // 작품이름, 가격, 이미지 + 작가이름 + 프로덕트 아이디
-//   const wantToCart = {
-//       // name: data["productName"],
-//       // price: data["price"],
-//       // image: data["image"],
-//       // artistName: data["painterEmail"],
-//       productId: seq,
-//   }
-//   // 기존 장바구니 리스트에 현재 작품이 있다면 error?
-
-//   // 기존 장바구니 리스트에 현재 작품까지 넣음.
-//   cartList.push(wantToCart);
-
-//   // 로컬스토리지에 추가
-//   localStorage.setItem("cart", JSON.stringify(cartList));
-// }
 
 function addCart(seq) {
   console.log("click");
@@ -196,7 +141,6 @@ function addCart(seq) {
   const wantToCart = {
     productId: seq,
   };
-  // 기존 장바구니 리스트에 현재 작품이 있는 경우
   let check = true;
   for(let elem of cartList){
     if(elem["productId"] === seq){
@@ -212,11 +156,6 @@ function addCart(seq) {
   localStorage.setItem("cart", JSON.stringify(cartList));
 }
 
-// addCartBtn.addEventListener("click", addCart);
-
-// 구매하기 +
-// const buyBtn = document.querySelector(".BuyNow");
-
 function buyNow(seq){
     const buyList = [{
         productId: seq,
@@ -231,4 +170,3 @@ function buyNow(seq){
     window.location.replace("/order");
 }
 
-// buyBtn.addEventListener("click", buyNow);

@@ -57,7 +57,7 @@ function addCart() {
     if (elem["productId"] === document.querySelector("#product-id").name) {
       check = false;
       alert("동일한 상품이 이미 장바구니에 담겨있습니다.");
-      break; // return;해도 되나...?
+      break; 
     }
   }
 

@@ -1,6 +1,4 @@
 import * as Api from "/api.js";
-// import { goToAddProductPage } from "/useful-functions.js";
-
 const postBtn = document.querySelector("#postButton");
 const productNameInput = document.querySelector("#name");
 const contentInput = document.querySelector("#content");
@@ -9,7 +7,6 @@ const categoryInput = document.querySelector("#category");
 
 const photoFile = document.querySelector("#image");
 let image = "";
-//console.log(formData);
 
 let painterEmail = "";
 let painterName = "";
@@ -23,12 +20,10 @@ async function insertUserData() {
   painterName = userData.painterName;
   role = userData.role;
   console.log(userData);
-  // goToAddProductPage(role);
 }
 
 insertUserData();
 //
-///////
 async function addProduct(e) {
   e.preventDefault();
   const productName = productNameInput.value;
@@ -76,9 +71,6 @@ async function addProduct(e) {
     categoryId = "636e3640ffde000765aac0d6";
   }
 
-  //   console.error(err.stack);
-  //   alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-  // }
 }
 
 postBtn.addEventListener("click", addProduct);

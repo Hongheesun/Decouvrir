@@ -3,7 +3,6 @@ import { location, getUrlParams } from "../../useful-functions.js";
 
 let categoryName = document.querySelector(".sub-title");
 let categoryItemList = document.querySelector(".work-wrapper");
-// goToAddProductPage();
 async function renderProducts() {
   const { category } = getUrlParams();
   categoryName.innerHTML = category;
@@ -38,10 +37,8 @@ function deleteProduct(seq) {
   fetch(`/api/${seq}`, {
     method: "DELETE",
   })
-    // .then((res) => res.json())
     .then((data) => {
       console.log("delete 성공!");
-      //   return data;
     })
     .catch((err) => console.log(err));
 
@@ -56,7 +53,6 @@ function newPage(seq) {
 
 function showToggle() {
   const togglePage = document.querySelector(".toggle-page");
-  // const closeBtn = document.querySelector(".closeBtn");
   togglePage.style.display = "block";
 }
 
@@ -92,6 +88,4 @@ function updateProduct(seq) {
       console.log("patch 성공!");
     })
     .catch((err) => console.log(err));
-
-  // closeAddPage();
 }

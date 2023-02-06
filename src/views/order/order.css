@@ -73,7 +73,6 @@ body {
   font-weight: 800;
   background-color: transparent;
   cursor: pointer;
-  /* align-self: flex-end; */
   margin-bottom: 20px;
   font-size: 13px;
 }
