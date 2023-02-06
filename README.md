@@ -1,1 +1,51 @@
+# **🖌Decouvrir(데쿠베)**
 
+<div align="center">
+<img width="80%" alt="image" src="https://user-images.githubusercontent.com/100406952/213235240-72803b50-5c6b-491e-8ab1-50202da084c7.gif">
+</div>
+
+## **프로젝트 소개**
+- 팀 명: 멈출 수 없는토끼🐰
+- 프로젝트 명: Decouvrir
+- 프로젝트 기간: 2022.10.31 ~ 2022.11.12
+- 기술 스택: <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" /> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" /> <img src="https://img.shields.io/badge/Bulma-00D1B2?style=flat&logo=Bulma&logoColor=white" /> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" /> <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge??style=flat&logo=Node.js&logoColor=white"/> <img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge?style=flat&logo=mongoDB&logoColor=white"/>  <img src="https://img.shields.io/badge/Amazon S3-black?style=for-the-badge?style=flat&logo=Amazon S3&logoColor=white"/> <img src="https://img.shields.io/badge/Figma-FFA200?style=flat&logo=Figma&logoColor=white" />
+
+<br/><br/> 
+## **Decorvir란?**
+Decorvir란 프랑스어로 "발견하다"라는 뜻으로, 신인 작가 발굴을 위한 미술 작품 거래 사이트입니다. <br/>
+- 미술 작품이 돋보이기 위해 전반적인 디자인을 미니멀하게 만들었습니다.
+- 액자 처럼 보이기 위한 css를 추가하였습니다.
+
+<br/><br/> 
+## **주요 기능**
+|         |  |
+ ------------ | --------- |
+| ![decouvrir 카테고리별 조회 resized](https://user-images.githubusercontent.com/100406952/213423459-88bf15c6-a29f-45a0-aaee-05c92bae837a.gif) |![decouvrir 이달의 작가 resized](https://user-images.githubusercontent.com/100406952/213429534-7ede558c-55a9-4560-bac6-a84a4aa82b9d.gif)|
+|작품 탭에서 카테고리 별로 작품을 조회할 수 있습니다. | 이달의 작가 3명의 정보와 작품을 확인할 수 있습니다.   |
+| ![decouvrir 장바구니, 주문 resized](https://user-images.githubusercontent.com/100406952/213429887-b31fa1b9-c6eb-4236-a3d2-f78b0248343e.gif) | ![decouvrir 상품등록 resized](https://user-images.githubusercontent.com/100406952/213430299-8ef6c722-a4bc-4760-95d1-b4e52b6dece8.gif) |
+| 상품을 장바구니에 담고 구매할 수 있습니다.  | 사이트에 자신의 작품을 직접 등록할 수 있습니다. |
+
+<br/><br/> 
+## **상세 기능**
+### 유저
+- 회원가입, 로그인
+- 작가와 일반 사용자를 나누어 회원가입 진행
+- 사용자 정보 조회
+- 사용자 정보 수정
+### 상품
+- 전체 및 카테고리 별 작품 조회
+- 작품 상세조회
+- 작가별 작품 모아보기
+- 작품 등록
+### 구매
+- 장바구니 담기, 조회
+- 결제 정보 입력 후 구매
+
+<br/><br/> 
+## **팀원 및 역할**
+| 이름         | 담당 업무 |
+| ------------ | --------- |
+| 홍희선(팀장) | FE        |
+| 소윤경       | FE        |
+| 고수정       | BE        |
+| 한승주       | BE        |
